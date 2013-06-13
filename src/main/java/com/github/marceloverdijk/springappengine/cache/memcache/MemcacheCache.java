@@ -5,7 +5,7 @@ import org.springframework.cache.Cache;
 import com.google.appengine.api.memcache.MemcacheService;
 
 /**
- * {@link Cache} implementation on top of the Google App Engine {@link MemcacheService}.
+ * {@link Cache} implementation backed by Google App Engine {@link MemcacheService}.
  *
  * @author Marcel Overdijk
  * @since 0.1

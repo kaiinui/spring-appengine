@@ -45,6 +45,12 @@ configure(allprojects) { project ->
         }
     }
 
+    javadoc {
+        options.author = true
+        options.header = project.name
+        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+    }
+
     publishing {
         publications {
             mavenJava(MavenPublication) {
