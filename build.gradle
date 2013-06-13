@@ -8,6 +8,7 @@ buildscript {
 }
 
 ext.springVersion = "3.2.0.RELEASE"
+ext.appengineVersion = "1.8.1"
 
 configure(allprojects) { project ->
 
@@ -26,6 +27,7 @@ configure(allprojects) { project ->
     }
 
     dependencies {
+        compile "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-context:$springVersion"
         compile "org.springframework:spring-context-support:$springVersion"
