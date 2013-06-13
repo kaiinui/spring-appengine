@@ -28,6 +28,7 @@ configure(allprojects) { project ->
     dependencies {
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-context-support:$springVersion"
     }
 
     jar {
@@ -35,8 +36,8 @@ configure(allprojects) { project ->
         manifest.attributes["Implementation-Title"] = project.name
         manifest.attributes["Implementation-Version"] = project.version
         from("${rootProject.projectDir}/src/dist") {
-            include "license.txt"
-            include "notice.txt"
+            include "LICENSE"
+            include "NOTICE"
             into "META-INF"
             expand(copyright: new Date().format("yyyy"), version: project.version)
         }
