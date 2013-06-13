@@ -1,3 +1,55 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.springsource.org/plugins-release" }
+    }
+    dependencies {
+        classpath "org.springframework.build.gradle:propdeps-plugin:0.0.2"
+    }
+}
+
+ext.springVersion = "3.2.0.RELEASE"
+
+configure(allprojects) { project ->
+
+    group = "com.github.marceloverdijk"
+
+    apply plugin: "java"
+    apply plugin: "maven-publish"
+    apply plugin: "propdeps"
+
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+
+    repositories {
+        maven { url "http://repo.springsource.org/libs-snapshot" }
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-context:$springVersion"
+    }
+
+    jar {
+        manifest.attributes["Created-By"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
+        manifest.attributes["Implementation-Title"] = project.name
+        manifest.attributes["Implementation-Version"] = project.version
+        from("${rootProject.projectDir}/src/dist") {
+            include "license.txt"
+            include "notice.txt"
+            into "META-INF"
+            expand(copyright: new Date().format("yyyy"), version: project.version)
+        }
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = "1.6"
