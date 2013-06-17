@@ -1,6 +1,8 @@
 package com.github.marceloverdijk.springappengine.cache.memcache;
 
 import org.springframework.cache.Cache;
+import org.springframework.cache.support.SimpleValueWrapper;
+import org.springframework.util.Assert;
 
 import com.google.appengine.api.memcache.MemcacheService;
 
@@ -12,36 +14,45 @@ import com.google.appengine.api.memcache.MemcacheService;
  */
 public class MemcacheCache implements Cache {
 
-    @Override
-    public void clear() {
-        // TODO
-    }
+    private final MemcacheService memcacheService;
 
-    @Override
-    public void evict(Object key) {
-        // TODO
-    }
-
-    @Override
-    public ValueWrapper get(Object key) {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public Object getNativeCache() {
-        // TODO
-        return null;
+    /**
+     * Create an {@link MemcacheCache} instance.
+     * @param memcacheService backing MemcacheService instance
+     */
+    public MemcacheCache(MemcacheService memcacheService) {
+        Assert.notNull(memcacheService, "MemcacheService must not be null");
+        this.memcacheService = memcacheService;
     }
 
     @Override
     public void put(Object key, Object value) {
-        // TODO
+        memcacheService.put(key, value);
+    }
+
+    @Override
+    public ValueWrapper get(Object key) {
+        Object value = memcacheService.get(key);
+        return (value != null ? new SimpleValueWrapper(value) : null);
+    }
+
+    @Override
+    public void evict(Object key) {
+        memcacheService.delete(key);
+    }
+
+    @Override
+    public void clear() {
+        memcacheService.clearAll();
+    }
+
+    @Override
+    public String getName() {
+        return memcacheService.getNamespace();
+    }
+
+    @Override
+    public MemcacheService getNativeCache() {
+        return memcacheService;
     }
 }

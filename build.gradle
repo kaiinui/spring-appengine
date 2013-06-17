@@ -7,8 +7,9 @@ buildscript {
     }
 }
 
-ext.springVersion = "3.2.0.RELEASE"
 ext.appengineVersion = "1.8.1"
+ext.junitVersion    = "4.11"
+ext.springVersion = "3.2.0.RELEASE"
 
 configure(allprojects) { project ->
 
@@ -31,6 +32,10 @@ configure(allprojects) { project ->
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-context:$springVersion"
         compile "org.springframework:spring-context-support:$springVersion"
+        testCompile("com.google.appengine:appengine-api-labs:${appengineVersion}")
+        testCompile("com.google.appengine:appengine-api-stubs:${appengineVersion}")
+        testCompile("com.google.appengine:appengine-testing:${appengineVersion}")
+        testCompile("junit:junit:${junitVersion}")
     }
 
     jar {
