@@ -22,10 +22,8 @@ public class MemcacheCacheTests {
 
     private static final String CACHE_NAME = "testCache";
 
-    private static final Object larry = "larry";
-    private static final Object page = "page";
-    private static final Object eric = "eric";
-    private static final Object schmidt = "schmidt";
+    private static final Object key = "larry";
+    private static final Object value = "page";
 
     private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalMemcacheServiceTestConfig());
 
@@ -47,46 +45,53 @@ public class MemcacheCacheTests {
     }
 
     @Test
-    public void testCachePut() {
-        assertNull(cache.get(larry));
-        cache.put(larry, page);
-        assertEquals(page, cache.get(larry).get());
+    public void testPut() {
+        assertNull(cache.get(key));
+        cache.put(key, value);
+        assertNotNull(cache.get(key).get());
     }
 
     @Test
-    public void testExpiration() throws Exception {
-        nativeCache.put(larry, page, Expiration.byDeltaSeconds(3));
-        assertEquals(page, cache.get(larry).get());
+    public void testGet() {
+        assertNull(cache.get(key));
+        cache.put(key, value);
+        assertEquals(value, cache.get(key).get());
+    }
+
+    @Test
+    public void testGetExpired() throws Exception {
+        assertNull(cache.get(key));
+        nativeCache.put(key, value, Expiration.byDeltaSeconds(3));
+        assertNotNull(cache.get(key).get());
         Thread.sleep(5 * 1000);
-        assertNull(cache.get(larry));
+        assertNull(cache.get(key));
     }
 
     @Test
-    public void testCacheRemove() {
-        cache.put(eric, schmidt);
-        assertNotNull(cache.get(eric));
-        cache.evict(eric);
-        assertNull(cache.get(eric));
+    public void testEvict() {
+        assertNull(cache.get(key));
+        cache.put(key, value);
+        assertNotNull(cache.get(key));
+        cache.evict(key);
+        assertNull(cache.get(key));
     }
 
     @Test
-    public void testCacheClear() {
-        cache.put(larry, page);
-        assertNotNull(cache.get(larry));
-        cache.put(eric, schmidt);
-        assertNotNull(cache.get(eric));
+    public void testClear() {
+        assertNull(cache.get(key));
+        cache.put(key, value);
+        assertNotNull(cache.get(key));
         cache.clear();
-        assertNull(cache.get(larry));
-        assertNull(cache.get(eric));
+        assertNull(cache.get(key));
     }
 
     @Test
-    public void testCacheName() {
+    public void testGetName() {
         assertEquals(CACHE_NAME, cache.getName());
     }
 
     @Test
-    public void testNativeCache() {
+    public void testGetNativeCache() {
         assertEquals(nativeCache, cache.getNativeCache());
     }
 }
