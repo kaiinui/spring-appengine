@@ -1,8 +1,10 @@
 buildscript {
     repositories {
+        mavenCentral()
         maven { url "http://repo.springsource.org/plugins-release" }
     }
     dependencies {
+        classpath "org.gradle.api.plugins:gradle-gae-plugin:0.8"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.2"
     }
 }
@@ -23,8 +25,8 @@ configure(allprojects) { project ->
     targetCompatibility = 1.6
 
     repositories {
-        maven { url "http://repo.springsource.org/libs-snapshot" }
         mavenCentral()
+        maven { url "http://repo.springsource.org/libs-snapshot" }
     }
 
     dependencies {
@@ -62,6 +64,20 @@ configure(allprojects) { project ->
                 from components.java
             }
         }
+    }
+}
+
+def samples = subprojects.findAll { project -> project.path.contains("samples") }
+
+configure(samples) {
+
+    apply plugin: "gae"
+    apply plugin: "war"
+
+    dependencies {
+        compile "org.springframework:spring-aspects:$springVersion"
+        compile "org.springframework:spring-beans:$springVersion"
+        compile "org.springframework:spring-webmvc:$springVersion"
     }
 }
 
