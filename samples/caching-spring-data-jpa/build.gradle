@@ -1,5 +1,17 @@
-ext.springDataVersion = "1.3.0.RELEASE"
+ext.datanucleusVersion = "3.1.3"
+ext.datanucleusAppengineVersion = "2.1.2"
+ext.geronimoJpaVersion = "1.0"
+ext.springDataJpaVersion = "1.3.0.RELEASE"
+
+configurations {
+    all*.exclude group: "javax.transaction", module: "transaction-api"
+}
 
 dependencies {
-    compile "org.springframework.data:spring-data-jpa:$springDataVersion"
+    compile "com.google.appengine.orm:datanucleus-appengine:$datanucleusAppengineVersion"
+    compile "org.apache.geronimo.specs:geronimo-jpa_2.0_spec:$geronimoJpaVersion"
+    compile "org.datanucleus:datanucleus-api-jdo:$datanucleusVersion"
+    compile "org.datanucleus:datanucleus-api-jpa:$datanucleusVersion"
+    compile "org.datanucleus:datanucleus-core:$datanucleusVersion"
+    compile "org.springframework.data:spring-data-jpa:$springDataJpaVersion"
 }

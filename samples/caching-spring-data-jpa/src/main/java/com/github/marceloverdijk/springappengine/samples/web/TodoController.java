@@ -1,7 +1,5 @@
 package com.github.marceloverdijk.springappengine.samples.web;
 
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +12,6 @@ import com.github.marceloverdijk.springappengine.samples.repository.TodoReposito
 @RequestMapping("/")
 public class TodoController {
 
-    private static final Logger log = Logger.getLogger(TodoController.class.getName());
-    
     private final TodoRepository todoRepository;
     
     @Autowired
@@ -26,7 +22,6 @@ public class TodoController {
     
     @RequestMapping
     public String index(Model model) {
-        log.entering(TodoController.class.getSimpleName(), "index");
         model.addAttribute("todos", todoRepository.findAll());
         return "index";
     }

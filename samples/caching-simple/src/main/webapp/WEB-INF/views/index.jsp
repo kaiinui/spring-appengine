@@ -1,2 +1,2 @@
 <p>index.jsp</p>
-<p>toDos = ${toDos}</p>
+<p>todos = ${todos}</p>

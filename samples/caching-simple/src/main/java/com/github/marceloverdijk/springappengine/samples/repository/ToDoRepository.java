@@ -8,21 +8,21 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ToDoRepository {
+public class TodoRepository {
 
-    private static final Logger log = Logger.getLogger(ToDoRepository.class.getName());
+    private static final Logger log = Logger.getLogger(TodoRepository.class.getName());
     
-    private List<String> toDos;
+    private List<String> todos;
     
-    public ToDoRepository() {
-        toDos = new ArrayList<String>();
-        toDos.add("Buy Beer");
-        toDos.add("Play The Last Of Us");
+    public TodoRepository() {
+        todos = new ArrayList<String>();
+        todos.add("Buy Beer");
+        todos.add("Play The Last of Us");
     }
 
-    @Cacheable("toDos")
-    public List<String> get() {
-        log.entering(ToDoRepository.class.getSimpleName(), "get");
-        return toDos;
+    @Cacheable("todos")
+    public List<String> findAll() {
+        log.entering(TodoRepository.class.getSimpleName(), "findAll");
+        return todos;
     }
 }

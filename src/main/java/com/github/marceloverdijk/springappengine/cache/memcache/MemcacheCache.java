@@ -1,5 +1,8 @@
 package com.github.marceloverdijk.springappengine.cache.memcache;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 import org.springframework.util.Assert;
@@ -16,10 +19,6 @@ public class MemcacheCache implements Cache {
 
     private final MemcacheService memcacheService;
 
-    /**
-     * Create an {@link MemcacheCache} instance.
-     * @param memcacheService backing MemcacheService instance
-     */
     public MemcacheCache(MemcacheService memcacheService) {
         Assert.notNull(memcacheService, "MemcacheService must not be null");
         this.memcacheService = memcacheService;
@@ -27,7 +26,7 @@ public class MemcacheCache implements Cache {
 
     @Override
     public void put(Object key, Object value) {
-        memcacheService.put(key, value);
+        memcacheService.put(key, toStoreValue(value));
     }
 
     @Override
@@ -54,5 +53,20 @@ public class MemcacheCache implements Cache {
     @Override
     public MemcacheService getNativeCache() {
         return memcacheService;
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    protected Object toStoreValue(Object value) {
+        // if value to store is StreamingQueryResult(/AbstractQueryResult)
+        // then get all objects from stream and return new list (stream cannot be stored in memcache)
+        try {
+            Class clazz = Class.forName("org.datanucleus.store.query.AbstractQueryResult");
+            if (clazz.isInstance(value)) {
+                return new ArrayList((Collection) value);
+            }
+        }
+        catch (Exception ignore) {
+        }
+        return value;
     }
 }
