@@ -57,10 +57,9 @@ public class MemcacheCache implements Cache {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     protected Object toStoreValue(Object value) {
-        // if value to store is StreamingQueryResult(/AbstractQueryResult)
-        // then get all objects from stream and return new list (stream cannot be stored in memcache)
+        // if value to store is StreamingQueryResult then get all objects from stream and return new list (stream cannot be stored in memcache)
         try {
-            Class clazz = Class.forName("org.datanucleus.store.query.AbstractQueryResult");
+            Class clazz = Class.forName("com.google.appengine.datanucleus.query.StreamingQueryResult");
             if (clazz.isInstance(value)) {
                 return new ArrayList((Collection) value);
             }

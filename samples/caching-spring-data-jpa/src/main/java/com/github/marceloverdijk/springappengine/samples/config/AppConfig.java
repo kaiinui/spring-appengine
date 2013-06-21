@@ -40,4 +40,9 @@ public class AppConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
+
+    @Bean
+    public RepositoryPopulator repositoryPopulator() {
+        return new RepositoryPopulator();
+    }
 }
