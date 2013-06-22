@@ -21,7 +21,7 @@ dependencies {
 }
 
 gae {
-    jvmFlags = ["-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=20"]
+    jvmFlags = ["-Ddatastore.default_high_rep_job_policy_unapplied_job_pct=10"]
 }
 
 gaeRun.dependsOn gaeEnhance
