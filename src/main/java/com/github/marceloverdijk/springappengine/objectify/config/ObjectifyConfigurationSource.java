@@ -13,14 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.marceloverdijk.springappengine.objectify.convert;
+package com.github.marceloverdijk.springappengine.objectify.config;
+
+import java.util.Collection;
+
+import org.springframework.core.io.ResourceLoader;
 
 /**
- * TODO
+ * Interface containing the configurable options for the Objectify OfyService.
  * 
  * @author Marcel Overdijk
  * @since 0.1
  */
-public class DomainClassConverter {
+public interface ObjectifyConfigurationSource {
 
+    /**
+     * Returns the base packages the Objectify entity classes shall be found under.
+     * 
+     * @return must not be {@literal null}.
+     */
+    Iterable<String> getBasePackages();
+
+    /**
+     * Returns the fully-qualified names of the Objectify entity classes.
+     * 
+     * @param loader
+     * @return
+     */
+    Collection<String> getCandidates(ResourceLoader loader);
 }
