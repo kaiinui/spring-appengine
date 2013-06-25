@@ -79,6 +79,6 @@ public class ObjectifyRegistrar implements ImportBeanDefinitionRegistrar, BeanCl
             factory.register(clazz);
         }
 
-        // TODO see RepositoryBeanDefinitionRegistrarSupport
+        registry.registerBeanDefinition(beanName, beanDefinition)
     }
 }
