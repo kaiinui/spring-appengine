@@ -10,7 +10,8 @@ buildscript {
 }
 
 ext.appengineVersion = "1.8.1"
-ext.junitVersion    = "4.11"
+ext.junitVersion = "4.11"
+ext.objectifyVersion = "4.0rc1"
 ext.springVersion = "3.2.3.RELEASE"
 
 configure(allprojects) { project ->
@@ -20,6 +21,9 @@ configure(allprojects) { project ->
     apply plugin: "java"
     apply plugin: "maven-publish"
     apply plugin: "propdeps"
+    apply plugin: "propdeps-eclipse"
+    apply plugin: "propdeps-idea"
+    apply plugin: "propdeps-maven"
 
     sourceCompatibility = 1.6
     targetCompatibility = 1.6
@@ -34,6 +38,7 @@ configure(allprojects) { project ->
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-context:$springVersion"
         compile "org.springframework:spring-context-support:$springVersion"
+        optional "com.googlecode.objectify:objectify:$objectifyVersion"
         testCompile("com.google.appengine:appengine-api-labs:${appengineVersion}")
         testCompile("com.google.appengine:appengine-api-stubs:${appengineVersion}")
         testCompile("com.google.appengine:appengine-testing:${appengineVersion}")
