@@ -37,14 +37,14 @@ configure(allprojects) { project ->
 
     dependencies {
         provided "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
+        provided "com.google.appengine:appengine-api-labs:${appengineVersion}"
+        provided "com.google.appengine:appengine-api-stubs:${appengineVersion}"
+        provided "com.google.appengine:appengine-testing:${appengineVersion}"
+        provided "com.googlecode.objectify:objectify:$objectifyVersion"
+        provided "junit:junit:${junitVersion}"
         provided "org.springframework:spring-core:$springVersion"
         provided "org.springframework:spring-context:$springVersion"
         provided "org.springframework:spring-context-support:$springVersion"
-        optional "com.googlecode.objectify:objectify:$objectifyVersion"
-        testCompile("com.google.appengine:appengine-api-labs:${appengineVersion}")
-        testCompile("com.google.appengine:appengine-api-stubs:${appengineVersion}")
-        testCompile("com.google.appengine:appengine-testing:${appengineVersion}")
-        testCompile("junit:junit:${junitVersion}")
     }
 
     jar {
@@ -63,14 +63,6 @@ configure(allprojects) { project ->
         options.author = true
         options.header = project.name
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
-    }
-
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-            }
-        }
     }
 }
 
