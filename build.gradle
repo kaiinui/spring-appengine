@@ -5,6 +5,7 @@ buildscript {
     }
     dependencies {
         classpath "org.gradle.api.plugins:gradle-gae-plugin:0.8"
+        classpath "org.gradle.api.plugins:gradle-nexus-plugin:0.3"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.2"
     }
 }
@@ -20,6 +21,7 @@ configure(allprojects) { project ->
 
     apply plugin: "java"
     apply plugin: "maven-publish"
+    apply plugin: "nexus"
     apply plugin: "propdeps"
     apply plugin: "propdeps-eclipse"
     apply plugin: "propdeps-idea"
