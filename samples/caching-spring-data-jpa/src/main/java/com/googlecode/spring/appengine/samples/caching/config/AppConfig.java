@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.config;
+package com.googlecode.spring.appengine.samples.caching.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,8 +15,8 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 @Configuration
-@ComponentScan(basePackages = { "com.github.marceloverdijk.springappengine.samples" })
-@EnableJpaRepositories(basePackages = { "com.github.marceloverdijk.springappengine.samples.repository" })
+@ComponentScan(basePackages = { "com.googlecode.spring.appengine.samples.caching" })
+@EnableJpaRepositories(basePackages = { "com.googlecode.spring.appengine.samples.caching.repository" })
 @EnableSpringConfigured
 @EnableTransactionManagement
 public class AppConfig {
@@ -25,7 +25,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setPersistenceUnitName("transactions-optional");
-        entityManagerFactory.setPersistenceUnitPostProcessors(new ClasspathScanningPersistenceUnitPostProcessor("com.github.marceloverdijk.springappengine.samples.domain"));
+        entityManagerFactory.setPersistenceUnitPostProcessors(new ClasspathScanningPersistenceUnitPostProcessor("com.googlecode.spring.appengine.samples.caching.domain"));
         return entityManagerFactory;
     }
 

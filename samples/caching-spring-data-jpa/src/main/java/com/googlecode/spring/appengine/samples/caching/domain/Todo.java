@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.domain;
+package com.googlecode.spring.appengine.samples.caching.domain;
 
 import java.io.Serializable;
 
@@ -39,5 +39,10 @@ public class Todo implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    @Override
+    public String toString() {
+        return summary;
     }
 }

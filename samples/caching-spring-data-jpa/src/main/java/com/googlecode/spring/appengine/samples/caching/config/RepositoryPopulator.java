@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.config;
+package com.googlecode.spring.appengine.samples.caching.config;
 
 import java.util.logging.Logger;
 
@@ -7,8 +7,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.dao.DataAccessException;
 
-import com.github.marceloverdijk.springappengine.samples.domain.Todo;
-import com.github.marceloverdijk.springappengine.samples.repository.TodoRepository;
+import com.googlecode.spring.appengine.samples.caching.domain.Todo;
+import com.googlecode.spring.appengine.samples.caching.repository.TodoRepository;
 
 public class RepositoryPopulator implements ApplicationListener<ContextRefreshedEvent> {
 

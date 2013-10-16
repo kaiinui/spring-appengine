@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.repository;
+package com.googlecode.spring.appengine.samples.caching.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.marceloverdijk.springappengine.samples.domain.Todo;
+import com.googlecode.spring.appengine.samples.caching.domain.Todo;
 
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
