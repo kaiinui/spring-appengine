@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.cache.memcache;
+package com.googlecode.spring.appengine.cache.memcache;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,6 +14,7 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.appengine.tools.development.testing.LocalMemcacheServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.googlecode.spring.appengine.cache.memcache.MemcacheCache;
 
 /**
  * @author Marcel Overdijk

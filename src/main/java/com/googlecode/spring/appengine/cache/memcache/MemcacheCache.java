@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.marceloverdijk.springappengine.cache.memcache;
+package com.googlecode.spring.appengine.cache.memcache;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
@@ -72,11 +73,21 @@ public class MemcacheCache implements Cache {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     protected Object toStoreValue(Object value) {
-        // if value to store is StreamingQueryResult then get all objects from stream and return new list (stream cannot be stored in memcache)
+        // datanucleus: if value to store is StreamingQueryResult then get all objects from stream and return new list (stream cannot be stored in memcache)
         try {
             Class clazz = Class.forName("com.google.appengine.datanucleus.query.StreamingQueryResult");
             if (clazz.isInstance(value)) {
                 return new ArrayList((Collection) value);
+            }
+        }
+        catch (Exception ignore) {
+        }
+        // objectify: wrap lists as objectify returns list proxies which cannot be serialized directly (https://code.google.com/p/objectify-appengine/issues/detail?id=166)
+        try {
+            @SuppressWarnings("unused")
+            Class clazz = Class.forName("com.googlecode.objectify.Objectify");
+            if (value instanceof List) {
+                return new ArrayList((List) value);
             }
         }
         catch (Exception ignore) {

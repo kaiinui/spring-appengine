@@ -5,7 +5,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.marceloverdijk.springappengine.cache.memcache.MemcacheCacheManager;
+import com.googlecode.spring.appengine.cache.memcache.MemcacheCacheManager;
 
 @Configuration
 @EnableCaching

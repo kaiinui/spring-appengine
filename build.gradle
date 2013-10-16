@@ -9,14 +9,14 @@ buildscript {
     }
 }
 
-ext.appengineVersion = "1.8.1"
+ext.appengineVersion = "1.8.5"
 ext.junitVersion = "4.11"
 ext.objectifyVersion = "4.0rc1"
-ext.springVersion = "3.2.3.RELEASE"
+ext.springVersion = "3.2.4.RELEASE"
 
 configure(allprojects) { project ->
 
-    group = "com.github.marceloverdijk"
+    group = "com.googlecode.spring-appengine"
 
     apply plugin: "java"
     apply plugin: "maven-publish"
@@ -34,10 +34,10 @@ configure(allprojects) { project ->
     }
 
     dependencies {
-        compile "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
-        compile "org.springframework:spring-core:$springVersion"
-        compile "org.springframework:spring-context:$springVersion"
-        compile "org.springframework:spring-context-support:$springVersion"
+        provided "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
+        provided "org.springframework:spring-core:$springVersion"
+        provided "org.springframework:spring-context:$springVersion"
+        provided "org.springframework:spring-context-support:$springVersion"
         optional "com.googlecode.objectify:objectify:$objectifyVersion"
         testCompile("com.google.appengine:appengine-api-labs:${appengineVersion}")
         testCompile("com.google.appengine:appengine-api-stubs:${appengineVersion}")
@@ -95,5 +95,5 @@ configure(samples) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "1.6"
+    gradleVersion = "1.7"
 }
