@@ -8,7 +8,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>com.github.marceloverdijk.springappengine.samples.config</param-value>
+        <param-value>com.googlecode.spring.appengine.samples.caching.config</param-value>
     </context-param>
 
     <context-param>

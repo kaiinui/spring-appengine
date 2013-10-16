@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.config;
+package com.googlecode.spring.appengine.samples.caching.config;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

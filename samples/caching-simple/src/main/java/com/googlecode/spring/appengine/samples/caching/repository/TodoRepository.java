@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.repository;
+package com.googlecode.spring.appengine.samples.caching.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class TodoRepository {
     public TodoRepository() {
         todos = new ArrayList<String>();
         todos.add("Buy Beer");
-        todos.add("Play The Last of Us");
+        todos.add("Play Grand Theft Auto V");
     }
 
     @Cacheable("todos")

@@ -24,7 +24,7 @@ public class RepositoryPopulator implements ApplicationListener<ContextRefreshed
             log.info("Todo repository is empty, creating tasks...");
             try {
                 todoRepository.saveAndFlush(new Todo("Buy Beer"));
-                todoRepository.saveAndFlush(new Todo("Play The Last of Us"));
+                todoRepository.saveAndFlush(new Todo("Play Grand Theft Auto V"));
             }
             catch (DataAccessException e) {
                 log.warning("Unable to create tasks");

@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.springappengine.samples.web;
+package com.googlecode.spring.appengine.samples.caching.web;
 
 import java.util.logging.Logger;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.github.marceloverdijk.springappengine.samples.repository.TodoRepository;
+import com.googlecode.spring.appengine.samples.caching.repository.TodoRepository;
 
 @Controller
 @RequestMapping("/")
