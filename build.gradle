@@ -69,6 +69,7 @@ configure(allprojects) { project ->
         project {
             name "spring-appengine"
             description "Spring App Engine Integration."
+            packaging "jar"
             url "https://github.com/marceloverdijk/spring-appengine"
             inceptionYear "2013"
     
