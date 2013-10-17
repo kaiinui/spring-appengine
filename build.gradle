@@ -64,7 +64,7 @@ configure(allprojects) { project ->
         options.header = project.name
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
     }
-    
+
     modifyPom {
         project {
             name "spring-appengine"
@@ -75,7 +75,7 @@ configure(allprojects) { project ->
             scm {
                 url "https://github.com/marceloverdijk/spring-appengine"
                 connection "scm:https://marceloverdijk@github.com/marceloverdijk/spring-appengine.git"
-                developerConnection 'scm:git://github.com/marceloverdijk/spring-appengine.git'
+                developerConnection "scm:git://github.com/marceloverdijk/spring-appengine.git"
             }
     
             licenses {
