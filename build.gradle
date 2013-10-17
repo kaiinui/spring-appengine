@@ -21,7 +21,6 @@ configure(allprojects) { project ->
     version = "0.1.BUILD-SNAPSHOT"
 
     apply plugin: "java"
-    apply plugin: "maven-publish"
     apply plugin: "nexus"
     apply plugin: "propdeps"
     apply plugin: "propdeps-eclipse"
