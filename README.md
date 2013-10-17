@@ -12,6 +12,11 @@ Add the library using the following Maven dependency:
         <version>0.1</version>
     </dependency>
 
+## Release history
+
+* 0.1 (2013-10-XX)
+    * Initial release containing Spring @Cacheable support using App Engine Memcache
+
 ## Community
 
 * Have a question that's not a feature request or bug report? [Ask on the mailing list.](http://groups.google.com/group/spring-appengine)
