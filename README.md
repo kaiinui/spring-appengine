@@ -25,8 +25,8 @@ Add the library using the following Maven dependency:
 
 **Marcel Overdijk**
 
-+ [http://twitter.com/mdo](http://twitter.com/marceloverdijk)
-+ [http://github.com/mdo](http://github.com/marceloverdijk)
++ [http://twitter.com/marceloverdijk](http://twitter.com/marceloverdijk)
++ [http://github.com/marceloverdijk](http://github.com/marceloverdijk)
 
 ## Copyright and License
 
