@@ -15,13 +15,65 @@ ext.junitVersion = "4.11"
 ext.objectifyVersion = "4.0rc1"
 ext.springVersion = "3.2.4.RELEASE"
 
+apply plugin: "java"
+apply plugin: "nexus"
+
+jar {
+    manifest.attributes["Created-By"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
+    manifest.attributes["Implementation-Title"] = project.name
+    manifest.attributes["Implementation-Version"] = project.version
+    from("${rootProject.projectDir}/src/dist") {
+        include "LICENSE"
+        include "NOTICE"
+        into "META-INF"
+        expand(copyright: new Date().format("yyyy"), version: project.version)
+    }
+}
+
+javadoc {
+    options.author = true
+    options.header = project.name
+    options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+}
+
+modifyPom {
+    project {
+        name "Spring App Engine"
+        description "Spring App Engine Integration."
+        packaging "jar"
+        url "https://github.com/marceloverdijk/spring-appengine"
+        inceptionYear "2013"
+
+        scm {
+            url "https://github.com/marceloverdijk/spring-appengine"
+            connection "scm:https://marceloverdijk@github.com/marceloverdijk/spring-appengine.git"
+            developerConnection "scm:git://github.com/marceloverdijk/spring-appengine.git"
+        }
+
+        licenses {
+            license {
+                name "The Apache Software License, Version 2.0"
+                url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution "repo"
+            }
+        }
+
+        developers {
+            developer {
+                id "marceloverdijk"
+                name "Marcel Overdijk"
+                email "marcel@overdijk.me"
+            }
+        }
+    }
+}
+
 configure(allprojects) { project ->
 
     group = "com.googlecode.spring-appengine"
-    version = "0.1"
+    version = "0.2-BUILD-SNAPSHOT"
 
     apply plugin: "java"
-    apply plugin: "nexus"
     apply plugin: "propdeps"
     apply plugin: "propdeps-eclipse"
     apply plugin: "propdeps-idea"
@@ -45,56 +97,6 @@ configure(allprojects) { project ->
         provided "org.springframework:spring-core:$springVersion"
         provided "org.springframework:spring-context:$springVersion"
         provided "org.springframework:spring-context-support:$springVersion"
-    }
-
-    jar {
-        manifest.attributes["Created-By"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
-        manifest.attributes["Implementation-Title"] = project.name
-        manifest.attributes["Implementation-Version"] = project.version
-        from("${rootProject.projectDir}/src/dist") {
-            include "LICENSE"
-            include "NOTICE"
-            into "META-INF"
-            expand(copyright: new Date().format("yyyy"), version: project.version)
-        }
-    }
-
-    javadoc {
-        options.author = true
-        options.header = project.name
-        options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
-    }
-
-    modifyPom {
-        project {
-            name "Spring App Engine"
-            description "Spring App Engine Integration."
-            packaging "jar"
-            url "https://github.com/marceloverdijk/spring-appengine"
-            inceptionYear "2013"
-    
-            scm {
-                url "https://github.com/marceloverdijk/spring-appengine"
-                connection "scm:https://marceloverdijk@github.com/marceloverdijk/spring-appengine.git"
-                developerConnection "scm:git://github.com/marceloverdijk/spring-appengine.git"
-            }
-    
-            licenses {
-                license {
-                    name "The Apache Software License, Version 2.0"
-                    url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-                    distribution "repo"
-                }
-            }
-    
-            developers {
-                developer {
-                    id "marceloverdijk"
-                    name "Marcel Overdijk"
-                    email "marcel@overdijk.me"
-                }
-            }
-        }
     }
 }
 
