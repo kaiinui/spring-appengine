@@ -64,6 +64,37 @@ configure(allprojects) { project ->
         options.header = project.name
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
     }
+    
+    modifyPom {
+        project {
+            name "spring-appengine"
+            description "Spring App Engine Integration."
+            url "https://github.com/marceloverdijk/spring-appengine"
+            inceptionYear "2013"
+    
+            scm {
+                url "https://github.com/marceloverdijk/spring-appengine"
+                connection "scm:https://marceloverdijk@github.com/marceloverdijk/spring-appengine.git"
+                developerConnection 'scm:git://github.com/marceloverdijk/spring-appengine.git'
+            }
+    
+            licenses {
+                license {
+                    name "The Apache Software License, Version 2.0"
+                    url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    distribution "repo"
+                }
+            }
+    
+            developers {
+                developer {
+                    id "marceloverdijk"
+                    name "Marcel Overdijk"
+                    email "marcel@overdijk.me"
+                }
+            }
+        }
+    }
 }
 
 def samples = subprojects.findAll { project -> project.path.contains("samples") }
