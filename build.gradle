@@ -26,7 +26,6 @@ configure(allprojects) { project ->
     apply plugin: "propdeps-eclipse"
     apply plugin: "propdeps-idea"
     apply plugin: "propdeps-maven"
-    apply plugin: "signing"
 
     sourceCompatibility = 1.6
     targetCompatibility = 1.6
@@ -64,10 +63,6 @@ configure(allprojects) { project ->
         options.author = true
         options.header = project.name
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
-    }
-
-    signing {
-        sign configurations.archives
     }
 }
 
