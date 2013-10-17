@@ -67,7 +67,7 @@ configure(allprojects) { project ->
 
     modifyPom {
         project {
-            name "spring-appengine"
+            name "Spring App Engine"
             description "Spring App Engine Integration."
             packaging "jar"
             url "https://github.com/marceloverdijk/spring-appengine"
