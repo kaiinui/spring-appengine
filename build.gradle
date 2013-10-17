@@ -65,6 +65,10 @@ configure(allprojects) { project ->
         options.header = project.name
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
     }
+
+    signing {
+        sign configurations.archives
+    }
 }
 
 def samples = subprojects.findAll { project -> project.path.contains("samples") }
