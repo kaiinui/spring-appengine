@@ -4,7 +4,7 @@ Spring App Engine Integration.
 
 ## Quick start
 
-Add the library using the following dependency:
+Add the library using the following Maven dependency:
 
     <dependency>
         <groupId>com.googlecode.spring-appengine</groupId>
