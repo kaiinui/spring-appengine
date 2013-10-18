@@ -14,7 +14,7 @@ Add the library using the following Maven dependency:
 
 ## Release history
 
-* 0.1 (2013-10-1X)
+* 0.1 (2013-10-17)
     * Initial release containing Spring @Cacheable support using App Engine Memcache
 
 ## Community
