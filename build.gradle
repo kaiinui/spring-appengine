@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-ext.appengineVersion = "1.8.5"
+ext.appengineVersion = "1.8.6"
 ext.junitVersion = "4.11"
 ext.objectifyVersion = "4.0rc1"
 ext.springVersion = "3.2.4.RELEASE"
