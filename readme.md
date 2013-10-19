@@ -12,9 +12,7 @@ Add the library using the following Maven dependency:
         <version>0.1</version>
     </dependency>
 
-## Javadoc
-
-* [Javadoc 0.1](http://marceloverdijk.github.io/spring-appengine/docs/0.1/javadoc-api)
+And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-appengine/docs/0.1/javadoc-api).
 
 ## Release history
 
