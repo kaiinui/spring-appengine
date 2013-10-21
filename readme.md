@@ -1,6 +1,6 @@
-# Spring App Engine
+# Spring App Engine Integration
 
-Spring App Engine Integration.
+<img src="https://raw.github.com/marceloverdijk/spring-appengine/master/media/logos/logo.jpg" alt="logo" width="350" />
 
 ## Quick start
 
@@ -29,6 +29,8 @@ And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-ap
 
 + [http://twitter.com/marceloverdijk](http://twitter.com/marceloverdijk)
 + [http://github.com/marceloverdijk](http://github.com/marceloverdijk)
+
+Logo designed and contributed by Ruud Voost.
 
 ## Copyright and License
 
