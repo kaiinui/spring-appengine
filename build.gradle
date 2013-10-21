@@ -11,9 +11,17 @@ buildscript {
 }
 
 ext.appengineVersion = "1.8.6"
+ext.commonsLoggingVersion = "1.1.1"
 ext.junitVersion = "4.11"
 ext.objectifyVersion = "4.0rc1"
 ext.springVersion = "3.2.4.RELEASE"
+
+ext.javadocLinks = [
+    "http://docs.objectify-appengine.googlecode.com/git/apidocs/",
+    "http://docs.oracle.com/javaee/6/api/",
+    "http://docs.oracle.com/javase/7/docs/api/",
+    "http://docs.spring.io/spring/docs/3.2.4.RELEASE/javadoc-api/"
+] as String[]
 
 apply plugin: "java"
 apply plugin: "nexus"
@@ -34,6 +42,7 @@ javadoc {
     options.author = true
     options.header = project.name
     options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
+    options.links(project.ext.javadocLinks)
 }
 
 modifyPom {
@@ -72,7 +81,7 @@ configure(allprojects) { project ->
 
     group = "com.googlecode.spring-appengine"
     version = "0.2-BUILD-SNAPSHOT"
-
+    
     apply plugin: "java"
     apply plugin: "propdeps"
     apply plugin: "propdeps-eclipse"
@@ -94,6 +103,7 @@ configure(allprojects) { project ->
         provided "com.google.appengine:appengine-testing:${appengineVersion}"
         provided "com.googlecode.objectify:objectify:$objectifyVersion"
         provided "junit:junit:${junitVersion}"
+        compile  "commons-logging:commons-logging:${commonsLoggingVersion}"
         provided "org.springframework:spring-core:$springVersion"
         provided "org.springframework:spring-context:$springVersion"
         provided "org.springframework:spring-context-support:$springVersion"

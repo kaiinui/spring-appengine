@@ -1,4 +1,4 @@
-rootProject.name = 'spring-appengine'
+rootProject.name = "spring-appengine"
 
 def samplesDirName = "samples"
 def samplesDir = new File(rootDir, samplesDirName)
