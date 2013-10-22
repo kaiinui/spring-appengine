@@ -20,6 +20,7 @@ import java.util.List;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.googlecode.objectify.annotation.Entity;
@@ -86,29 +87,43 @@ public class OfyServiceFactoryBean implements FactoryBean<OfyService>, Initializ
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        
         OfyServiceBuilder builder = new OfyServiceBuilder();
-        String[] basePackages = StringUtils.tokenizeToStringArray(this.basePackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
-        for (String basePackage : basePackages) {
-            builder.addBasePackage(basePackage);
+        
+        if (StringUtils.hasText(basePackage)) {
+            String[] basePackages = StringUtils.tokenizeToStringArray(this.basePackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
+            for (String basePackage : basePackages) {
+                builder.addBasePackage(basePackage);
+            }
         }
-        for (Class<?> clazz : entityClasses) {
-            builder.registerEntity(clazz);
+        
+        if (entityClasses != null) {
+            for (Class<?> clazz : entityClasses) {
+                builder.registerEntity(clazz);
+            }
         }
-        for (TranslatorFactory<?> translatorFactory : translatorFactories) {
-            builder.registerTranslatorFactory(translatorFactory);
+        
+        if (translatorFactories != null) {
+            for (TranslatorFactory<?> translatorFactory : translatorFactories) {
+                builder.registerTranslatorFactory(translatorFactory);
+            }
         }
+        
         this.ofyService = builder.build();
     }
 
     public void setBasePackage(String basePackage) {
+        Assert.notNull(basePackage, "basePackage must not be null");
         this.basePackage = basePackage;
     }
 
     public void setEntityClasses(List<Class<?>> entityClasses) {
+        Assert.notNull(entityClasses, "entityClasses must not be null");
         this.entityClasses = entityClasses;
     }
 
     public void setTranslatorFactories(List<TranslatorFactory<?>> translatorFactories) {
+        Assert.notNull(translatorFactories, "translatorFactories must not be null");
         this.translatorFactories = translatorFactories;
     }
 }
