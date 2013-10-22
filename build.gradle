@@ -98,9 +98,9 @@ configure(allprojects) { project ->
 
     dependencies {
         provided "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
-        provided "com.google.appengine:appengine-api-labs:${appengineVersion}"
-        provided "com.google.appengine:appengine-api-stubs:${appengineVersion}"
-        provided "com.google.appengine:appengine-testing:${appengineVersion}"
+        testCompile "com.google.appengine:appengine-api-labs:${appengineVersion}"
+        testCompile "com.google.appengine:appengine-api-stubs:${appengineVersion}"
+        testCompile "com.google.appengine:appengine-testing:${appengineVersion}"
         provided "com.googlecode.objectify:objectify:$objectifyVersion"
         provided "junit:junit:${junitVersion}"
         compile  "commons-logging:commons-logging:${commonsLoggingVersion}"
