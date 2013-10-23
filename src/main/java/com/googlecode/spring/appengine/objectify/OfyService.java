@@ -18,11 +18,13 @@ package com.googlecode.spring.appengine.objectify;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.Deleter;
+import com.googlecode.objectify.cmd.Loader;
+import com.googlecode.objectify.cmd.Saver;
 
 /**
- * Service implementation following the Objectify best practice pattern to create 
- * a custom service to interact with the master {@link ObjectifyFactory} and get 
- * {@link Objectify} instances.
+ * Service implementation following the Objectify best practice pattern to create
+ * a custom service to interact with the master {@link ObjectifyFactory} and get {@link Objectify} instances.
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -36,5 +38,17 @@ public class OfyService {
 
     public ObjectifyFactory factory() {
         return ObjectifyService.factory();
+    }
+
+    public Deleter delete() {
+        return ofy().delete();
+    }
+
+    public Loader load() {
+        return ofy().load();
+    }
+
+    public Saver save() {
+        return ofy().save();
     }
 }
