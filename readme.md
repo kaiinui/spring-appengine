@@ -32,7 +32,7 @@ And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-ap
 + [http://twitter.com/marceloverdijk](http://twitter.com/marceloverdijk)
 + [http://github.com/marceloverdijk](http://github.com/marceloverdijk)
 
-Logo designed and contributed by Ruud Voost.
+Logo designed and contributed by [Ruud Voost](http://www.ruudvoost.com).
 
 ## Copyright and License
 
