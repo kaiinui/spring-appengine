@@ -10,6 +10,19 @@ buildscript {
     }
 }
 
+apply plugin: "java"
+apply plugin: "nexus"
+apply plugin: "propdeps"
+apply plugin: "propdeps-eclipse"
+apply plugin: "propdeps-idea"
+apply plugin: "propdeps-maven"
+
+group = "com.googlecode.spring-appengine"
+version = "0.2-BUILD-SNAPSHOT"
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
 ext.appengineVersion = "1.8.6"
 ext.commonsLoggingVersion = "1.1.1"
 ext.junitVersion = "4.11"
@@ -17,15 +30,24 @@ ext.objectifyVersion = "4.0rc2"
 ext.springVersion = "3.2.4.RELEASE"
 ext.springDataVersion = "1.6.1.RELEASE"
 
-ext.javadocLinks = [
-    "http://docs.objectify-appengine.googlecode.com/git/apidocs/",
-    "http://docs.oracle.com/javaee/6/api/",
-    "http://docs.oracle.com/javase/7/docs/api/",
-    "http://docs.spring.io/spring/docs/3.2.4.RELEASE/javadoc-api/"
-] as String[]
+repositories {
+    mavenCentral()
+    maven { url "http://repo.springsource.org/libs-snapshot" }
+}
 
-apply plugin: "java"
-apply plugin: "nexus"
+dependencies {
+    optional "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
+    testCompile "com.google.appengine:appengine-api-labs:${appengineVersion}"
+    testCompile "com.google.appengine:appengine-api-stubs:${appengineVersion}"
+    testCompile "com.google.appengine:appengine-testing:${appengineVersion}"
+    optional "com.googlecode.objectify:objectify:$objectifyVersion"
+    testCompile "junit:junit:${junitVersion}"
+    compile  "commons-logging:commons-logging:${commonsLoggingVersion}"
+    optional "org.springframework:spring-core:$springVersion"
+    optional "org.springframework:spring-context:$springVersion"
+    optional "org.springframework:spring-context-support:$springVersion"
+    optional "org.springframework.data:spring-data-commons:$springDataVersion"
+}
 
 jar {
     manifest.attributes["Created-By"] = "${System.getProperty("java.version")} (${System.getProperty("java.specification.vendor")})"
@@ -43,7 +65,12 @@ javadoc {
     options.author = true
     options.header = project.name
     options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
-    options.links(project.ext.javadocLinks)
+    options.links([
+        "http://docs.objectify-appengine.googlecode.com/git/apidocs/",
+        "http://docs.oracle.com/javaee/6/api/",
+        "http://docs.oracle.com/javase/7/docs/api/",
+        "http://docs.spring.io/spring/docs/3.2.4.RELEASE/javadoc-api/"
+    ] as String[])
 }
 
 modifyPom {
@@ -75,62 +102,6 @@ modifyPom {
                 email "marcel@overdijk.me"
             }
         }
-    }
-}
-
-configure(allprojects) { project ->
-
-    group = "com.googlecode.spring-appengine"
-    version = "0.2-BUILD-SNAPSHOT"
-    
-    apply plugin: "java"
-    apply plugin: "propdeps"
-    apply plugin: "propdeps-eclipse"
-    apply plugin: "propdeps-idea"
-    apply plugin: "propdeps-maven"
-
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
-
-    repositories {
-        mavenCentral()
-        maven { url "http://repo.springsource.org/libs-snapshot" }
-    }
-
-    dependencies {
-        optional "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion"
-        testCompile "com.google.appengine:appengine-api-labs:${appengineVersion}"
-        testCompile "com.google.appengine:appengine-api-stubs:${appengineVersion}"
-        testCompile "com.google.appengine:appengine-testing:${appengineVersion}"
-        optional "com.googlecode.objectify:objectify:$objectifyVersion"
-        testCompile "junit:junit:${junitVersion}"
-        compile  "commons-logging:commons-logging:${commonsLoggingVersion}"
-        optional "org.springframework:spring-core:$springVersion"
-        optional "org.springframework:spring-context:$springVersion"
-        optional "org.springframework:spring-context-support:$springVersion"
-        optional "org.springframework.data:spring-data-commons:$springDataVersion"
-    }
-}
-
-def samples = subprojects.findAll { project -> project.path.contains("samples") }
-
-configure(samples) {
-
-    apply plugin: "gae"
-    apply plugin: "war"
-
-    dependencies {
-        compile rootProject
-        compile "org.springframework:spring-aspects:$springVersion"
-        compile "org.springframework:spring-beans:$springVersion"
-        compile "org.springframework:spring-webmvc:$springVersion"
-        gaeSdk "com.google.appengine:appengine-java-sdk:$appengineVersion"
-    }
-
-    gae {
-        disableUpdateCheck = true
-        downloadSdk = true
-        stopPort = 8090
     }
 }
 
