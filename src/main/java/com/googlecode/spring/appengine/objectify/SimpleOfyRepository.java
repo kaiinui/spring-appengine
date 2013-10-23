@@ -1,7 +1,24 @@
 package com.googlecode.spring.appengine.objectify;
 
+/*
+ * Copyright 2013 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -10,6 +27,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+/**
+ * TODO
+ * 
+ * @author Marcel Overdijk
+ * @since 0.2
+ */
 @Repository
 public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepository<T, ID> {
 
@@ -90,13 +113,18 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public <S extends T> List<S> save(Iterable<S> entities) {
-        // TODO
-        return null;
+        ofyService.ofy().save().entities(entities).now();
+        List<S> temp = new ArrayList<S>();
+        Iterator<S> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            temp.add(iterator.next());
+        }
+        return temp;
     }
 
     @Override
     public <S extends T> S save(S entity) {
-        // TODO
-        return null;
+        ofyService.ofy().save().entity(entity).now();
+        return entity;
     }
 }

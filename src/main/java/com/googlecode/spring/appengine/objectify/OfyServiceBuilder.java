@@ -34,7 +34,7 @@ import com.googlecode.objectify.impl.translate.TranslatorFactory;
  * configuration setup.
  * 
  * <p> The builder can scan for {@link Entity} annotated classes by adding base packages.
- * Instead of scanning for entities it is also possible to register them manually. 
+ * Instead of scanning for entities it is also possible to register them manually.
  * 
  * @author Marcel Overdijk
  * @since 0.2
