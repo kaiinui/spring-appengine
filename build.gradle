@@ -1,15 +1,18 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url "http://jcenter.bintray.com" }
         maven { url "http://repo.springsource.org/plugins-release" }
     }
     dependencies {
+        classpath "org.asciidoctor:asciidoctor-gradle-plugin:0.7.0"
         classpath "org.gradle.api.plugins:gradle-gae-plugin:0.8"
         classpath "org.gradle.api.plugins:gradle-nexus-plugin:0.3"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.2"
     }
 }
 
+apply plugin: "asciidoctor"
 apply plugin: "java"
 apply plugin: "nexus"
 apply plugin: "propdeps"
@@ -47,6 +50,19 @@ dependencies {
     optional "org.springframework:spring-context:$springVersion"
     optional "org.springframework:spring-context-support:$springVersion"
     optional "org.springframework.data:spring-data-commons:$springDataVersion"
+}
+
+asciidoctor {
+    options = [
+        eruby: "erubis",
+        attributes: [
+            'source-highlighter': 'prettify',
+            sectanchors : "",
+            toc2: "",
+            idprefix: "",
+            idseparator: "-"
+        ]
+    ]
 }
 
 jar {
