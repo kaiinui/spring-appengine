@@ -1,5 +1,3 @@
-package com.googlecode.spring.appengine.objectify;
-
 /*
  * Copyright 2013 the original author or authors.
  *
@@ -15,11 +13,14 @@ package com.googlecode.spring.appengine.objectify;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.spring.appengine.objectify;
+
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,8 +37,8 @@ import org.springframework.util.Assert;
 @Repository
 public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepository<T, ID> {
 
-    private OfyService ofyService;
-    private Class<T> type;
+    protected OfyService ofyService;
+    protected Class<T> type;
 
     public SimpleOfyRepository(OfyService ofyService) {
         Assert.notNull(ofyService, "OfyService must not be null");
@@ -47,44 +48,53 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public long count() {
-        return ofyService.ofy().load().type(type).count();
+        return ofyService.load().type(type).count();
     }
 
     @Override
     public void delete(ID id) {
-        // TODO
+        Assert.notNull(id, "The id must not be null");
+        if (id instanceof Long) {
+            ofyService.delete().type(type).id((Long) id).now();
+        }
+        else {
+            ofyService.delete().type(type).id((String) id).now();
+        }
     }
 
     @Override
     public void delete(Iterable<? extends T> entities) {
-        ofyService.ofy().delete().entities(entities);
+        Assert.notNull(entities, "The iterable of entities must not be null"); 
+        ofyService.delete().entities(entities).now();
     }
 
     @Override
     public void delete(T entity) {
-        ofyService.ofy().delete().entity(entity);
+        Assert.notNull(entity, "The entity must not be null");
+        ofyService.delete().entity(entity).now();
     }
 
     @Override
     public void deleteAll() {
-        // TODO
+        ofyService.delete().keys(ofyService.load().type(type).keys().list()).now();
     }
 
     @Override
     public boolean exists(ID id) {
-        // TODO
-        return false;
+        Assert.notNull(id, "The id must not be null");
+        return findOne(id) != null;
     }
 
     @Override
     public List<T> findAll() {
-        return ofyService.ofy().load().type(type).list();
+        return ofyService.load().type(type).list();
     }
 
     @Override
     public List<T> findAll(Iterable<ID> ids) {
-        // TODO
-        return null;
+        Assert.notNull(ids, "The iterable of ids must not be null");
+        Map<ID, T> entities = ofyService.load().type(type).ids(ids);
+        return new ArrayList<T>(entities.values());
     }
 
     @Override
@@ -101,19 +111,19 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public T findOne(ID id) {
-//        if (id instanceof Long) {
-//            return ofyService.ofy().load().type(type).id((Long) id).now();
-//        }
-//        else {
-//            return ofyService.ofy().load().type(type).id((String) id).now();
-//        }
-        // TODO
-        return null;
+        Assert.notNull(id, "The id must not be null");
+        if (id instanceof Long) {
+            return ofyService.load().type(type).id((Long) id).now();
+        }
+        else {
+            return ofyService.load().type(type).id((String) id).now();
+        }
     }
 
     @Override
     public <S extends T> List<S> save(Iterable<S> entities) {
-        ofyService.ofy().save().entities(entities).now();
+        Assert.notNull(entities, "The iterable of entities must not be null");
+        ofyService.save().entities(entities).now();
         List<S> temp = new ArrayList<S>();
         Iterator<S> iterator = entities.iterator();
         while (iterator.hasNext()) {
@@ -124,7 +134,8 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public <S extends T> S save(S entity) {
-        ofyService.ofy().save().entity(entity).now();
+        Assert.notNull(entity, "The entity must not be null");
+        ofyService.save().entity(entity).now();
         return entity;
     }
 }

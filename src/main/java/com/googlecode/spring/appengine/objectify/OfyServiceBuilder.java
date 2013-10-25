@@ -63,36 +63,29 @@ public class OfyServiceBuilder {
     }
 
     public OfyService build() {
-
         long startTime = System.currentTimeMillis();
-
         entityClasses.addAll(scanBasePackages());
-
         OfyService ofyService = new OfyService();
-
         for (Class<?> clazz : entityClasses) {
             ofyService.factory().register(clazz);
             if (logger.isInfoEnabled()) {
                 logger.info("Registered entity class [" + clazz.getName() + "]");
             }
         }
-
         for (TranslatorFactory<?> translatorFactory : translatorFactories) {
             ofyService.factory().getTranslators().add(translatorFactory);
             if (logger.isInfoEnabled()) {
                 logger.info("Registered translator factory [" + translatorFactory.getClass().getName() + "]");
             }
         }
-
         if (this.logger.isInfoEnabled()) {
             long elapsedTime = System.currentTimeMillis() - startTime;
             this.logger.info("Building objectify service completed in " + elapsedTime + " ms");
         }
-
         return ofyService;
     }
 
-    private List<Class<?>> scanBasePackages() {
+    protected List<Class<?>> scanBasePackages() {
         List<Class<?>> classes = new ArrayList<Class<?>>();
         for (String basePackage : basePackages) {
             if (this.logger.isInfoEnabled()) {

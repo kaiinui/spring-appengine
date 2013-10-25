@@ -86,28 +86,23 @@ public class OfyServiceFactoryBean implements FactoryBean<OfyService>, Initializ
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
         OfyServiceBuilder builder = new OfyServiceBuilder();
-
         if (StringUtils.hasText(basePackage)) {
             String[] basePackages = StringUtils.tokenizeToStringArray(this.basePackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
             for (String basePackage : basePackages) {
                 builder.addBasePackage(basePackage);
             }
         }
-
         if (entityClasses != null) {
             for (Class<?> clazz : entityClasses) {
                 builder.registerEntity(clazz);
             }
         }
-
         if (translatorFactories != null) {
             for (TranslatorFactory<?> translatorFactory : translatorFactories) {
                 builder.registerTranslatorFactory(translatorFactory);
             }
         }
-
         this.ofyService = builder.build();
     }
 
