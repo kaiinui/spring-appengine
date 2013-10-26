@@ -18,15 +18,19 @@ package com.googlecode.spring.appengine.objectify;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
+
+import com.googlecode.objectify.cmd.Query;
 
 /**
  * TODO
@@ -40,6 +44,7 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
     protected OfyService ofyService;
     protected Class<T> type;
 
+    @SuppressWarnings("unchecked")
     public SimpleOfyRepository(OfyService ofyService) {
         Assert.notNull(ofyService, "OfyService must not be null");
         this.ofyService = ofyService;
@@ -99,14 +104,28 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public Page<T> findAll(Pageable pageable) {
-        // TODO
-        return null;
+        if (pageable == null) {
+            return new PageImpl<T>(findAll());
+        }
+        Query<T> query = ofyService.load().type(type);
+        query.offset(pageable.getOffset());
+        query.limit(pageable.getPageSize());
+        long total = count();
+        List<T> content = total > pageable.getOffset() ? query.list() : Collections.<T> emptyList();
+        return new PageImpl<T>(content, pageable, total);
     }
 
     @Override
     public List<T> findAll(Sort sort) {
-        // TODO
-        return null;
+        Query<T> query = ofyService.load().type(type);
+        if (sort != null) {
+            Iterator<Sort.Order> iterator = sort.iterator();
+            while (iterator.hasNext()) {
+                Sort.Order order = iterator.next();
+                query = query.order((order.isAscending() ? "" : "-") + order.getProperty());
+            }
+        }
+        return query.list();
     }
 
     @Override

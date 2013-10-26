@@ -15,7 +15,7 @@
  */
 package com.googlecode.spring.appengine.objectify;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.BeansException;
@@ -24,34 +24,37 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterRegistry;
 import org.springframework.util.StringUtils;
 
-import com.googlecode.objectify.cmd.LoadType;
 import com.googlecode.objectify.impl.EntityMetadata;
 
 /**
- * {@link Converter} to convert arbitrary input into domain classes. 
- * The implementation uses a {@link ConversionService} to convert the source type 
- * into the domain class' id type which is then converted into a domain class 
+ * {@link Converter} to convert arbitrary input into domain classes.
+ * The implementation uses a {@link ConversionService} to convert the source type
+ * into the domain class' id type which is then converted into a domain class
  * object by executing an Objectify query via the {@link OfyService}.
  * 
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class DomainClassConverter<T extends ConversionService & ConverterRegistry> implements ConditionalGenericConverter, ApplicationContextAware {
+public class OfyEntityClassConverter<T extends ConversionService & ConverterRegistry> implements ConditionalGenericConverter, ApplicationContextAware {
 
     private final T conversionService;
     private final OfyService ofyService;
 
-    public DomainClassConverter(T conversionService, OfyService ofyService) {
+    public OfyEntityClassConverter(T conversionService, OfyService ofyService) {
         this.conversionService = conversionService;
         this.ofyService = ofyService;
     }
 
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
-        return Collections.singleton(new ConvertiblePair(Object.class, Object.class));
+        Set<ConvertiblePair> convertibleTypes = new HashSet<ConvertiblePair>();
+        convertibleTypes.add(new ConvertiblePair(Long.class, Object.class));
+        convertibleTypes.add(new ConvertiblePair(String.class, Object.class));
+        return convertibleTypes;
     }
 
     @Override
@@ -60,15 +63,11 @@ public class DomainClassConverter<T extends ConversionService & ConverterRegistr
             return null;
         }
         Object id = conversionService.convert(source, getIdFieldType(targetType.getType()));
-        LoadType<?> loadType = ofyService.ofy().load().type(targetType.getType());
         if (id instanceof Long) {
-            return loadType.id((Long) id);
-        }
-        else if (id instanceof String) {
-            return loadType.id((String) id);
+            return ofyService.ofy().load().type(targetType.getType()).id((Long) id);
         }
         else {
-            return null;
+            return ofyService.ofy().load().type(targetType.getType()).id((String) id);
         }
     }
 
@@ -81,7 +80,7 @@ public class DomainClassConverter<T extends ConversionService & ConverterRegistr
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.conversionService.addConverter(this);
     }
-    
+
     private Class<?> getIdFieldType(Class<?> clazz) {
         EntityMetadata<?> metadata = ofyService.factory().getMetadata(clazz);
         return metadata.getKeyMetadata().getIdFieldType();
