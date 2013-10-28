@@ -9,4 +9,80 @@
     <short-name>gae</short-name>
     <uri>http://spring-appengine.googlecode.com/tags</uri>
 
+    <tag>
+        <description>Tag which outputs the application identifier for the current application.</description>
+        <name>applicationId</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.ApplicationIdTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the variable to export the application identifier value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the version identifier for the current application.</description>
+        <name>applicationVersion</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.ApplicationVersionTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the variable to export the version identifier value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the body of the tag if the current executing environment is Development.</description>
+        <name>development</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.DevelopmentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the body of the tag if the current executing environment is Production.</description>
+        <name>production</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.ProductionTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
 </taglib>

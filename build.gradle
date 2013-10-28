@@ -28,8 +28,10 @@ targetCompatibility = 1.6
 
 ext.appengineVersion = "1.8.6"
 ext.commonsLoggingVersion = "1.1.1"
+ext.jspVersion = "2.1"
 ext.junitVersion = "4.11"
 ext.objectifyVersion = "4.0rc2"
+ext.servletVersion = "2.5"
 ext.springVersion = "3.2.4.RELEASE"
 ext.springDataVersion = "1.6.1.RELEASE"
 
@@ -46,9 +48,12 @@ dependencies {
     optional "com.googlecode.objectify:objectify:$objectifyVersion"
     testCompile "junit:junit:${junitVersion}"
     compile  "commons-logging:commons-logging:${commonsLoggingVersion}"
+    provided "javax.servlet:servlet-api:${servletVersion}"
+    provided "javax.servlet.jsp:jsp-api:${jspVersion}"
     optional "org.springframework:spring-core:$springVersion"
     optional "org.springframework:spring-context:$springVersion"
     optional "org.springframework:spring-context-support:$springVersion"
+    optional "org.springframework:spring-web:$springVersion"
     optional "org.springframework.data:spring-data-commons:$springDataVersion"
 }
 
@@ -82,6 +87,7 @@ javadoc {
     options.header = project.name
     options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
     options.links([
+        "http://developers.google.com/appengine/docs/java/javadoc/",
         "http://docs.objectify-appengine.googlecode.com/git/apidocs/",
         "http://docs.oracle.com/javaee/6/api/",
         "http://docs.oracle.com/javase/7/docs/api/",
