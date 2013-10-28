@@ -121,6 +121,10 @@ modifyPom {
     }
 }
 
+configure([test]) {
+    systemProperties['springAppengineVersion'] = version
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = "1.7"
 }
