@@ -49,8 +49,8 @@
 
     <tag>
         <description>Tag which outputs the body of the tag if the current executing environment is Development.</description>
-        <name>development</name>
-        <tag-class>com.googlecode.spring.appengine.taglib.DevelopmentTag</tag-class>
+        <name>isDevelopment</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsDevelopmentTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <description>The name of the variable to export the value to.</description>
@@ -68,11 +68,49 @@
 
     <tag>
         <description>Tag which outputs the body of the tag if the current executing environment is Production.</description>
-        <name>production</name>
-        <tag-class>com.googlecode.spring.appengine.taglib.ProductionTag</tag-class>
+        <name>isProduction</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsProductionTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the current executing runtime environment.</description>
+        <name>runtimeEnvironment</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.RuntimeEnvironmentTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the variable to export the current executing runtime environment value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the current executing runtime version.</description>
+        <name>runtimeVersion</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.RuntimeVersionTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the variable to export the current executing runtime version value to.</description>
             <name>var</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>

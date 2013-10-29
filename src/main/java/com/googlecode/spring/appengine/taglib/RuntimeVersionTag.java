@@ -15,6 +15,8 @@
  */
 package com.googlecode.spring.appengine.taglib;
 
+import java.io.IOException;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
@@ -25,40 +27,49 @@ import org.springframework.web.util.TagUtils;
 import com.google.appengine.api.utils.SystemProperty;
 
 /**
- * Conditional JSP {@link Tag} which evaluates its body if the current executing 
- * environment is <code>Development</code>. 
- * Optionally exposes a <code>Boolean</code> scripting variable representing the 
- * evaluation of <code>SystemProperty.environment.value() == SystemProperty.Environment.Value.Development</code>.
+ * JSP {@link Tag} which outputs the current executing runtime version. 
+ * Optionally exposes a <code>String</code> scripting variable containing the 
+ * current executing runtime version. 
  * 
  * @author Marcel Overdijk
  * @since 0.2
- * @see SystemProperty#environment
+ * @see SystemProperty#version
  */
 @SuppressWarnings("serial")
-public class DevelopmentTag extends TagSupport {
+public class RuntimeVersionTag extends TagSupport {
 
     private String var;
     
     private int scope = PageContext.PAGE_SCOPE;
-
+    
     @Override
-    public int doStartTag() throws JspException {
-        boolean development = SystemProperty.environment.value() == SystemProperty.Environment.Value.Development;
-        if (var != null) {
-            pageContext.setAttribute(var, development, scope);
+    public int doEndTag() throws JspException {
+        String version = SystemProperty.version.get();
+        if (this.var == null) {
+            try {
+                pageContext.getOut().print(version);
+            }
+            catch (IOException e) {
+                throw new JspException(e);
+            }
         }
-        return development ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
+        else {
+            pageContext.setAttribute(var, version, scope);
+        }
+        return Tag.EVAL_PAGE;
     }
 
     /**
-     * Set the variable name to expose the value under. 
+     * Set the variable name to expose the current executing runtime version under. 
+     * Defaults to rendering the current executing runtime version to the current 
+     * {@link javax.servlet.jsp.JspWriter}.
      */
     public void setVar(String var) {
         this.var = var;
     }
     
     /**
-     * Set the scope to export the variable to. 
+     * Set the scope to export the current executing runtime version variable to. 
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */

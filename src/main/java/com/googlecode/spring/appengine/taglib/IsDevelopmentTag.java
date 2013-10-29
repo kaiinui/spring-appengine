@@ -26,16 +26,16 @@ import com.google.appengine.api.utils.SystemProperty;
 
 /**
  * Conditional JSP {@link Tag} which evaluates its body if the current executing 
- * environment is <code>Production</code>. 
+ * environment is <code>Development</code>. 
  * Optionally exposes a <code>Boolean</code> scripting variable representing the 
- * evaluation of <code>SystemProperty.environment.value() == SystemProperty.Environment.Value.Production</code>.
+ * evaluation of <code>SystemProperty.environment.value() == SystemProperty.Environment.Value.Development</code>.
  * 
  * @author Marcel Overdijk
  * @since 0.2
  * @see SystemProperty#environment
  */
 @SuppressWarnings("serial")
-public class ProductionTag extends TagSupport {
+public class IsDevelopmentTag extends TagSupport {
 
     private String var;
     
@@ -43,11 +43,11 @@ public class ProductionTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        boolean production = SystemProperty.environment.value() == SystemProperty.Environment.Value.Production;
+        boolean development = SystemProperty.environment.value() == SystemProperty.Environment.Value.Development;
         if (var != null) {
-            pageContext.setAttribute(var, production, scope);
+            pageContext.setAttribute(var, development, scope);
         }
-        return production ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
+        return development ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
     }
 
     /**
