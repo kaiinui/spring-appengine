@@ -86,6 +86,44 @@
     </tag>
 
     <tag>
+        <description>Tag which outputs the body of the tag if the logged in user is an admin user.</description>
+        <name>isUserAdmin</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsUserAdminTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the body of the tag if there is a user logged in.</description>
+        <name>isUserLoggedIn</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsUserLoggedInTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
         <description>Tag which outputs the current executing runtime environment.</description>
         <name>runtimeEnvironment</name>
         <tag-class>com.googlecode.spring.appengine.taglib.RuntimeEnvironmentTag</tag-class>

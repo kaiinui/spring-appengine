@@ -27,10 +27,8 @@ import org.springframework.web.util.TagUtils;
 import com.google.appengine.api.utils.SystemProperty;
 
 /**
- * JSP {@link Tag} which outputs the version identifier for the 
- * current application. 
- * Optionally exposes a <code>String</code> scripting variable containing the 
- * version identifier. 
+ * JSP {@link Tag} which outputs the version identifier for the current application. 
+ * Optionally exposes a <code>String</code> scripting variable containing the value. 
  * 
  * @author Marcel Overdijk
  * @since 0.2

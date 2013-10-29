@@ -28,8 +28,7 @@ import com.google.appengine.api.utils.SystemProperty;
 
 /**
  * JSP {@link Tag} which outputs the current executing runtime version. 
- * Optionally exposes a <code>String</code> scripting variable containing the 
- * current executing runtime version. 
+ * Optionally exposes a <code>String</code> scripting variable containing the value. 
  * 
  * @author Marcel Overdijk
  * @since 0.2

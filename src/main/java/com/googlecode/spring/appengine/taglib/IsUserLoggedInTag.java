@@ -15,8 +15,6 @@
  */
 package com.googlecode.spring.appengine.taglib;
 
-import java.io.IOException;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
@@ -24,51 +22,42 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.springframework.web.util.TagUtils;
 
-import com.google.appengine.api.utils.SystemProperty;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /**
- * JSP {@link Tag} which outputs the application identifier for the current application. 
- * Optionally exposes a <code>String</code> scripting variable containing the value. 
+ * Conditional JSP {@link Tag} which evaluates its body if there is a user logged in. 
+ * Optionally exposes a <code>Boolean</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
  * @since 0.2
- * @see SystemProperty#applicationId
+ * @see UserService#isUserLoggedIn()
  */
 @SuppressWarnings("serial")
-public class ApplicationIdTag extends TagSupport {
+public class IsUserLoggedInTag extends TagSupport {
 
     private String var;
     
     private int scope = PageContext.PAGE_SCOPE;
-    
+
     @Override
-    public int doEndTag() throws JspException {
-        String applicationId = SystemProperty.applicationId.get();
-        if (this.var == null) {
-            try {
-                pageContext.getOut().print(applicationId);
-            }
-            catch (IOException e) {
-                throw new JspException(e);
-            }
+    public int doStartTag() throws JspException {
+        boolean isUserLoggedIn = UserServiceFactory.getUserService().isUserLoggedIn();
+        if (var != null) {
+            pageContext.setAttribute(var, isUserLoggedIn, scope);
         }
-        else {
-            pageContext.setAttribute(var, applicationId, scope);
-        }
-        return Tag.EVAL_PAGE;
+        return isUserLoggedIn ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
     }
 
     /**
-     * Set the variable name to expose the application identifier under. 
-     * Defaults to rendering the application identifier to the current 
-     * {@link javax.servlet.jsp.JspWriter}.
+     * Set the variable name to expose the value under. 
      */
     public void setVar(String var) {
         this.var = var;
     }
     
     /**
-     * Set the scope to export the application identifier variable to. 
+     * Set the scope to export the variable to. 
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */
