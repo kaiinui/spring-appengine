@@ -27,8 +27,8 @@ import org.springframework.web.util.TagUtils;
 import com.google.appengine.api.utils.SystemProperty;
 
 /**
- * JSP {@link Tag} which outputs the version identifier for the current application. 
- * Optionally exposes a <code>String</code> scripting variable containing the value. 
+ * JSP {@link Tag} which outputs the version identifier for the current application.
+ * Optionally exposes a <code>String</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -38,13 +38,12 @@ import com.google.appengine.api.utils.SystemProperty;
 public class ApplicationVersionTag extends TagSupport {
 
     private String var;
-    
     private int scope = PageContext.PAGE_SCOPE;
-    
+
     @Override
     public int doEndTag() throws JspException {
         String applicationVersion = SystemProperty.applicationVersion.get();
-        if (this.var == null) {
+        if (var == null) {
             try {
                 pageContext.getOut().print(applicationVersion);
             }
@@ -59,16 +58,15 @@ public class ApplicationVersionTag extends TagSupport {
     }
 
     /**
-     * Set the variable name to expose the application identifier under. 
-     * Defaults to rendering the application identifier to the current 
-     * {@link javax.servlet.jsp.JspWriter}.
+     * Set the variable name to expose the application identifier under.
+     * Defaults to rendering the application identifier to the current {@link javax.servlet.jsp.JspWriter}.
      */
     public void setVar(String var) {
         this.var = var;
     }
-    
+
     /**
-     * Set the scope to export the application identifier variable to. 
+     * Set the scope to export the application identifier variable to.
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */

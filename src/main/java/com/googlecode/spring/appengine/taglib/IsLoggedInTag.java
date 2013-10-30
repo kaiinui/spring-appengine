@@ -26,7 +26,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 /**
- * Conditional JSP {@link Tag} which evaluates its body if the logged in user is an admin user. 
+ * Conditional JSP {@link Tag} which evaluates its body if there is a user logged in.
  * Optionally exposes a <code>Boolean</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
@@ -34,30 +34,29 @@ import com.google.appengine.api.users.UserServiceFactory;
  * @see UserService#isUserLoggedIn()
  */
 @SuppressWarnings("serial")
-public class IsUserAdminTag extends TagSupport {
+public class IsLoggedInTag extends TagSupport {
 
     private String var;
-    
     private int scope = PageContext.PAGE_SCOPE;
 
     @Override
     public int doStartTag() throws JspException {
-        boolean isUserAdmin = UserServiceFactory.getUserService().isUserAdmin();
+        boolean isLoggedIn = UserServiceFactory.getUserService().isUserLoggedIn();
         if (var != null) {
-            pageContext.setAttribute(var, isUserAdmin, scope);
+            pageContext.setAttribute(var, isLoggedIn, scope);
         }
-        return isUserAdmin ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
+        return isLoggedIn ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
     }
 
     /**
-     * Set the variable name to expose the value under. 
+     * Set the variable name to expose the value under.
      */
     public void setVar(String var) {
         this.var = var;
     }
-    
+
     /**
-     * Set the scope to export the variable to. 
+     * Set the scope to export the variable to.
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */

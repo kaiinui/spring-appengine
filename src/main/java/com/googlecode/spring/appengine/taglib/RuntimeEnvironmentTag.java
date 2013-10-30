@@ -27,8 +27,8 @@ import org.springframework.web.util.TagUtils;
 import com.google.appengine.api.utils.SystemProperty;
 
 /**
- * JSP {@link Tag} which outputs the current executing runtime environment. 
- * Optionally exposes a <code>String</code> scripting variable containing the value. 
+ * JSP {@link Tag} which outputs the current executing runtime environment.
+ * Optionally exposes a <code>String</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -38,13 +38,12 @@ import com.google.appengine.api.utils.SystemProperty;
 public class RuntimeEnvironmentTag extends TagSupport {
 
     private String var;
-    
     private int scope = PageContext.PAGE_SCOPE;
-    
+
     @Override
     public int doEndTag() throws JspException {
         String environment = SystemProperty.environment.get();
-        if (this.var == null) {
+        if (var == null) {
             try {
                 pageContext.getOut().print(environment);
             }
@@ -59,16 +58,15 @@ public class RuntimeEnvironmentTag extends TagSupport {
     }
 
     /**
-     * Set the variable name to expose the current executing runtime environment. 
-     * Defaults to rendering the current executing runtime environment to the current 
-     * {@link javax.servlet.jsp.JspWriter}.
+     * Set the variable name to expose the current executing runtime environment.
+     * Defaults to rendering the current executing runtime environment to the current {@link javax.servlet.jsp.JspWriter}.
      */
     public void setVar(String var) {
         this.var = var;
     }
-    
+
     /**
-     * Set the scope to export the current executing runtime environment variable to. 
+     * Set the scope to export the current executing runtime environment variable to.
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */

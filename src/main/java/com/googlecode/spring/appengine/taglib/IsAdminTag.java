@@ -22,31 +22,30 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.springframework.web.util.TagUtils;
 
-import com.google.appengine.api.utils.SystemProperty;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /**
- * Conditional JSP {@link Tag} which evaluates its body if the current executing
- * environment is <code>Development</code>.
- * Optionally exposes a <code>Boolean</code> scripting variable representing the
- * evaluation of <code>SystemProperty.environment.value() == SystemProperty.Environment.Value.Development</code>.
+ * Conditional JSP {@link Tag} which evaluates its body if the logged in user is an admin user.
+ * Optionally exposes a <code>Boolean</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
  * @since 0.2
- * @see SystemProperty#environment
+ * @see UserService#isUserLoggedIn()
  */
 @SuppressWarnings("serial")
-public class IsDevelopmentTag extends TagSupport {
+public class IsAdminTag extends TagSupport {
 
     private String var;
     private int scope = PageContext.PAGE_SCOPE;
 
     @Override
     public int doStartTag() throws JspException {
-        boolean development = SystemProperty.environment.value() == SystemProperty.Environment.Value.Development;
+        boolean isAdmin = UserServiceFactory.getUserService().isUserAdmin();
         if (var != null) {
-            pageContext.setAttribute(var, development, scope);
+            pageContext.setAttribute(var, isAdmin, scope);
         }
-        return development ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
+        return isAdmin ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
     }
 
     /**

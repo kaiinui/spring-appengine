@@ -22,51 +22,76 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.BeansException;
 import org.springframework.web.util.TagUtils;
 
-import com.google.appengine.api.utils.SystemProperty;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /**
- * JSP {@link Tag} which outputs the current executing runtime version.
- * Optionally exposes a <code>String</code> scripting variable containing the value.
+ * JSP {@link Tag} which allows convenient access to the logged in {@link User} object.
+ * Optionally exposes a <code>Object</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
  * @since 0.2
- * @see SystemProperty#version
+ * @see UserService#getCurrentUser()
  */
 @SuppressWarnings("serial")
-public class RuntimeVersionTag extends TagSupport {
+public class UserTag extends TagSupport {
 
+    private String property;
     private String var;
     private int scope = PageContext.PAGE_SCOPE;
 
     @Override
     public int doEndTag() throws JspException {
-        String version = SystemProperty.version.get();
+        Object result = null;
+        if (property != null) {
+            User user = UserServiceFactory.getUserService().getCurrentUser();
+            if (user != null) {
+                try {
+                    BeanWrapperImpl wrapper = new BeanWrapperImpl(user);
+                    result = wrapper.getPropertyValue(property);
+                }
+                catch (BeansException e) {
+                    throw new JspException(e);
+                }
+            }
+        }
         if (var == null) {
             try {
-                pageContext.getOut().print(version);
+                pageContext.getOut().print(result);
             }
             catch (IOException e) {
                 throw new JspException(e);
             }
         }
         else {
-            pageContext.setAttribute(var, version, scope);
+            pageContext.setAttribute(var, result, scope);
         }
         return Tag.EVAL_PAGE;
     }
 
     /**
-     * Set the variable name to expose the current executing runtime version under.
-     * Defaults to rendering the current executing runtime version to the current {@link javax.servlet.jsp.JspWriter}.
+     * Set the property name of the {@link User} object which should be output.
+     * Supports nested properties.
+     */
+    public void setProperty(String property) {
+        this.property = property;
+    }
+
+    /**
+     * Set the variable name to expose the application identifier under.
+     * Defaults to rendering the application identifier to the current {@link javax.servlet.jsp.JspWriter}.
      */
     public void setVar(String var) {
         this.var = var;
     }
 
     /**
-     * Set the scope to export the current executing runtime version variable to.
+     * Set the scope to export the application identifier variable to.
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */

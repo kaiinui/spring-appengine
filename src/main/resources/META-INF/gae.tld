@@ -48,6 +48,44 @@
     </tag>
 
     <tag>
+        <description>Tag which outputs the id of the instance handling the request.</description>
+        <name>instanceId</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.InstanceIdTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the variable to export the instance identifier value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the body of the tag if the logged in user is an admin user.</description>
+        <name>isAdmin</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsAdminTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
         <description>Tag which outputs the body of the tag if the current executing environment is Development.</description>
         <name>isDevelopment</name>
         <tag-class>com.googlecode.spring.appengine.taglib.IsDevelopmentTag</tag-class>
@@ -67,47 +105,66 @@
     </tag>
 
     <tag>
+        <description>Tag which outputs the body of the tag if there is a user logged in.</description>
+        <name>isLoggedIn</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsLoggedInTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the body of the tag if the logged in user is not an admin user.</description>
+        <name>isNotAdmin</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsNotAdminTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which outputs the body of the tag if there is no user logged in.</description>
+        <name>isNotLoggedIn</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.IsNotLoggedInTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the variable to export the value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
         <description>Tag which outputs the body of the tag if the current executing environment is Production.</description>
         <name>isProduction</name>
         <tag-class>com.googlecode.spring.appengine.taglib.IsProductionTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>The name of the variable to export the value to.</description>
-            <name>var</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
-            <name>scope</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-
-    <tag>
-        <description>Tag which outputs the body of the tag if the logged in user is an admin user.</description>
-        <name>isUserAdmin</name>
-        <tag-class>com.googlecode.spring.appengine.taglib.IsUserAdminTag</tag-class>
-        <body-content>JSP</body-content>
-        <attribute>
-            <description>The name of the variable to export the value to.</description>
-            <name>var</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
-            <name>scope</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-    </tag>
-
-    <tag>
-        <description>Tag which outputs the body of the tag if there is a user logged in.</description>
-        <name>isUserLoggedIn</name>
-        <tag-class>com.googlecode.spring.appengine.taglib.IsUserLoggedInTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <description>The name of the variable to export the value to.</description>
@@ -147,6 +204,31 @@
         <name>runtimeVersion</name>
         <tag-class>com.googlecode.spring.appengine.taglib.RuntimeVersionTag</tag-class>
         <body-content>empty</body-content>
+        <attribute>
+            <description>The name of the variable to export the current executing runtime version value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which allows convenient access to the logged in User object</description>
+        <name>user</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.UserTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The property name of the User object which should be output. Supports nested properties.</description>
+            <name>property</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <attribute>
             <description>The name of the variable to export the current executing runtime version value to.</description>
             <name>var</name>

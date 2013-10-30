@@ -15,6 +15,8 @@
  */
 package com.googlecode.spring.appengine.taglib;
 
+import java.io.IOException;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
@@ -22,42 +24,51 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.springframework.web.util.TagUtils;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.utils.SystemProperty;
+import com.google.apphosting.api.ApiProxy;
 
 /**
- * Conditional JSP {@link Tag} which evaluates its body if there is a user logged in. 
- * Optionally exposes a <code>Boolean</code> scripting variable containing the value.
+ * JSP {@link Tag} which outputs the id of the instance handling the request.
+ * Optionally exposes a <code>String</code> scripting variable containing the value.
  * 
  * @author Marcel Overdijk
  * @since 0.2
- * @see UserService#isUserLoggedIn()
+ * @see SystemProperty#instanceReplicaId
  */
 @SuppressWarnings("serial")
-public class IsUserLoggedInTag extends TagSupport {
+public class InstanceIdTag extends TagSupport {
 
     private String var;
-    
     private int scope = PageContext.PAGE_SCOPE;
 
     @Override
-    public int doStartTag() throws JspException {
-        boolean isUserLoggedIn = UserServiceFactory.getUserService().isUserLoggedIn();
-        if (var != null) {
-            pageContext.setAttribute(var, isUserLoggedIn, scope);
+    public int doEndTag() throws JspException {
+        Object value = ApiProxy.getCurrentEnvironment().getAttributes().get("com.google.appengine.instance.id");
+        String instanceId = value != null ? value.toString() : null;
+        if (var == null) {
+            try {
+                pageContext.getOut().print(instanceId);
+            }
+            catch (IOException e) {
+                throw new JspException(e);
+            }
         }
-        return isUserLoggedIn ? Tag.EVAL_BODY_INCLUDE : Tag.SKIP_BODY;
+        else {
+            pageContext.setAttribute(var, instanceId, scope);
+        }
+        return Tag.EVAL_PAGE;
     }
 
     /**
-     * Set the variable name to expose the value under. 
+     * Set the variable name to expose the instance identifier under.
+     * Defaults to rendering the instance identifier to the current {@link javax.servlet.jsp.JspWriter}.
      */
     public void setVar(String var) {
         this.var = var;
     }
-    
+
     /**
-     * Set the scope to export the variable to. 
+     * Set the scope to export the instance identifier variable to.
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */

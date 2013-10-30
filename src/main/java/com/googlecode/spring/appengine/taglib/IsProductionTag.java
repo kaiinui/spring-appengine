@@ -25,9 +25,9 @@ import org.springframework.web.util.TagUtils;
 import com.google.appengine.api.utils.SystemProperty;
 
 /**
- * Conditional JSP {@link Tag} which evaluates its body if the current executing 
- * environment is <code>Production</code>. 
- * Optionally exposes a <code>Boolean</code> scripting variable representing the 
+ * Conditional JSP {@link Tag} which evaluates its body if the current executing
+ * environment is <code>Production</code>.
+ * Optionally exposes a <code>Boolean</code> scripting variable representing the
  * evaluation of <code>SystemProperty.environment.value() == SystemProperty.Environment.Value.Production</code>.
  * 
  * @author Marcel Overdijk
@@ -38,7 +38,6 @@ import com.google.appengine.api.utils.SystemProperty;
 public class IsProductionTag extends TagSupport {
 
     private String var;
-    
     private int scope = PageContext.PAGE_SCOPE;
 
     @Override
@@ -51,14 +50,14 @@ public class IsProductionTag extends TagSupport {
     }
 
     /**
-     * Set the variable name to expose the value under. 
+     * Set the variable name to expose the value under.
      */
     public void setVar(String var) {
         this.var = var;
     }
-    
+
     /**
-     * Set the scope to export the variable to. 
+     * Set the scope to export the variable to.
      * This attribute has no meaning unless var is also defined.
      * Defaults to {@link PageContext#PAGE_SCOPE}.
      */
