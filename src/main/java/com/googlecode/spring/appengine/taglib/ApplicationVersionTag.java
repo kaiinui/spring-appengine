@@ -37,12 +37,18 @@ import com.google.appengine.api.utils.SystemProperty;
 @SuppressWarnings("serial")
 public class ApplicationVersionTag extends TagSupport {
 
+    private boolean ignoreMinorVersion = false;
     private String var;
     private int scope = PageContext.PAGE_SCOPE;
 
     @Override
     public int doEndTag() throws JspException {
         String applicationVersion = SystemProperty.applicationVersion.get();
+        if (ignoreMinorVersion) {
+            if (applicationVersion.contains(".")) {
+                applicationVersion = applicationVersion.substring(0, applicationVersion.lastIndexOf("."));
+            }
+        }
         if (var == null) {
             try {
                 pageContext.getOut().print(applicationVersion);
@@ -57,6 +63,13 @@ public class ApplicationVersionTag extends TagSupport {
         return Tag.EVAL_PAGE;
     }
 
+    /**
+     * Set to ignore the minor version. 
+     */
+    public void setIgnoreMinorVersion(boolean ignoreMinorVersion) {
+        this.ignoreMinorVersion = ignoreMinorVersion;
+    }
+    
     /**
      * Set the variable name to expose the application identifier under.
      * Defaults to rendering the application identifier to the current {@link javax.servlet.jsp.JspWriter}.

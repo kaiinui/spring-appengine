@@ -34,6 +34,12 @@
         <tag-class>com.googlecode.spring.appengine.taglib.ApplicationVersionTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
+            <description>Boolean indicating to ignore the minor version number.</description>
+            <name>ignoreMinorVersion</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>The name of the variable to export the version identifier value to.</description>
             <name>var</name>
             <required>false</required>
