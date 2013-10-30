@@ -43,11 +43,12 @@ public class InstanceIdTag extends TagSupport {
 
     @Override
     public int doEndTag() throws JspException {
-        Object value = ApiProxy.getCurrentEnvironment().getAttributes().get("com.google.appengine.instance.id");
-        String instanceId = value != null ? value.toString() : null;
+        Object instanceId = ApiProxy.getCurrentEnvironment().getAttributes().get("com.google.appengine.instance.id");
         if (var == null) {
             try {
-                pageContext.getOut().print(instanceId);
+                if (instanceId != null) {
+                    pageContext.getOut().print(instanceId);
+                }
             }
             catch (IOException e) {
                 throw new JspException(e);
