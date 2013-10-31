@@ -18,6 +18,7 @@ And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-ap
 
 * 0.2 (WIP)
     * Added Objectify integration (WIP)
+    * Added convenient JSP taglib encapsulating Google App Engine functionality like printing the application identifier, login link, etc. 
 * 0.1 (2013-10-17)
     * Initial release containing Spring @Cacheable support using App Engine Memcache
 
