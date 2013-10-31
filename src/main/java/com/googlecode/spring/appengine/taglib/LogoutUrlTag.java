@@ -33,7 +33,7 @@ import com.google.appengine.api.users.UserServiceFactory;
  * 
  * @author Marcel Overdijk
  * @since 0.2
- * @see UserService#createLoginURL(String)
+ * @see UserService#createLogoutURL(String)
  */
 @SuppressWarnings("serial")
 public class LogoutUrlTag extends TagSupport {
