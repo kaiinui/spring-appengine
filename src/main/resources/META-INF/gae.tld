@@ -187,6 +187,62 @@
     </tag>
 
     <tag>
+        <description>Tag which returns the url that can be used to display a login page to the user.</description>
+        <name>loginUrl</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.LoginUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The destination url where the user will be redirected after they log in.</description>
+            <name>destinationUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The federated identity string which is to be asserted for users who are authenticated using a non-Google ID (e.g., OpenID). In order to use federated logins this feature must be enabled for the application.</description>
+            <name>federatedIdentity</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The name of the variable to export the login url value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tag which returns the url that can be used to log the current user out.</description>
+        <name>logoutUrl</name>
+        <tag-class>com.googlecode.spring.appengine.taglib.LogoutUrlTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The destination url where the user will be redirected after they log out.</description>
+            <name>destinationUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The name of the variable to export the logout url value to.</description>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>The scope for the var. 'application', 'session', 'request' and 'page' scopes are supported. Defaults to page scope. This attribute has no effect unless the var attribute is also defined.</description>
+            <name>scope</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
         <description>Tag which outputs the current executing runtime environment.</description>
         <name>runtimeEnvironment</name>
         <tag-class>com.googlecode.spring.appengine.taglib.RuntimeEnvironmentTag</tag-class>
