@@ -53,7 +53,9 @@ dependencies {
     optional "org.springframework:spring-core:${springVersion}"
     optional "org.springframework:spring-context:${springVersion}"
     optional "org.springframework:spring-context-support:${springVersion}"
+    testCompile "org.springframework:spring-test:${springVersion}"
     optional "org.springframework:spring-web:${springVersion}"
+    optional "org.springframework:spring-webmvc:${springVersion}"
     optional "org.springframework.data:spring-data-commons:${springDataVersion}"
 }
 
