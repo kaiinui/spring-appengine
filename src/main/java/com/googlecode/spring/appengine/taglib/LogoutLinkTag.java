@@ -45,12 +45,14 @@ public class LogoutLinkTag extends TagSupport implements DynamicAttributes {
         String logoutUrl = UserServiceFactory.getUserService().createLogoutURL(destinationUrl);
         try {
             JspWriter out = pageContext.getOut();
-            out.print("<a href=\"" + logoutUrl + "\" ");
-            for (Map.Entry<String, Object> dynamicAttribute : dynamicAttributes.entrySet()) {
-                String key = dynamicAttribute.getKey();
-                Object val = dynamicAttribute.getValue();
-                if (val != null) {
-                    out.print(key + "=\"" + val.toString() + "\" ");
+            out.print("<a href=\"" + logoutUrl + "\"");
+            if (dynamicAttributes != null) {
+                for (Map.Entry<String, Object> dynamicAttribute : dynamicAttributes.entrySet()) {
+                    String key = dynamicAttribute.getKey();
+                    Object val = dynamicAttribute.getValue();
+                    if (val != null) {
+                        out.print(" " + key + "=\"" + val.toString() + "\"");
+                    }
                 }
             }
             out.print(">");

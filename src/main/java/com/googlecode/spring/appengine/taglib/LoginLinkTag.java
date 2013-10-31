@@ -47,12 +47,14 @@ public class LoginLinkTag extends TagSupport implements DynamicAttributes {
         String loginUrl = UserServiceFactory.getUserService().createLoginURL(destinationUrl, federatedIdentity);
         try {
             JspWriter out = pageContext.getOut();
-            out.print("<a href=\"" + loginUrl + "\" ");
-            for (Map.Entry<String, Object> dynamicAttribute : dynamicAttributes.entrySet()) {
-                String key = dynamicAttribute.getKey();
-                Object val = dynamicAttribute.getValue();
-                if (val != null) {
-                    out.print(key + "=\"" + val.toString() + "\" ");
+            out.print("<a href=\"" + loginUrl + "\"");
+            if (dynamicAttributes != null) {
+                for (Map.Entry<String, Object> dynamicAttribute : dynamicAttributes.entrySet()) {
+                    String key = dynamicAttribute.getKey();
+                    Object val = dynamicAttribute.getValue();
+                    if (val != null) {
+                        out.print(" " + key + "=\"" + val.toString() + "\"");
+                    }
                 }
             }
             out.print(">");
