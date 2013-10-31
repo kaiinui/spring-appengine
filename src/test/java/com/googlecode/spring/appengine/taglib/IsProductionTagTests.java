@@ -16,34 +16,34 @@ import com.google.appengine.api.utils.SystemProperty;
 /**
  * @author Marcel Overdijk
  */
-public class IsDevelopmentTagTests extends AbstractTagTests {
+public class IsProductionTagTests extends AbstractTagTests {
 
-    private IsDevelopmentTag tag;
+    private IsProductionTag tag;
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        tag = new IsDevelopmentTag();
+        tag = new IsProductionTag();
         tag.setPageContext(pageContext);
     }
 
     @Test
-    public void testShowsBodyIfDevelopment() throws Exception {
-        SystemProperty.environment.set(Development);
+    public void testShowsBodyIfProduction() throws Exception {
+        SystemProperty.environment.set(Production);
         assertEquals(Tag.EVAL_BODY_INCLUDE, tag.doStartTag());
         assertEquals(Tag.EVAL_PAGE, tag.doEndTag());
     }
 
     @Test
-    public void testSkipsBodyIfNotDevelopment() throws Exception {
-        SystemProperty.environment.set(Production);
+    public void testSkipsBodyIfNotProduction() throws Exception {
+        SystemProperty.environment.set(Development);
         assertEquals(Tag.SKIP_BODY, tag.doStartTag());
         assertEquals(Tag.EVAL_PAGE, tag.doEndTag());
     }
 
     @Test
     public void testVarDefaultScope() throws Exception {
-        SystemProperty.environment.set(Development);
+        SystemProperty.environment.set(Production);
         tag.setVar("myVar");
         tag.doStartTag();
         tag.doEndTag();
@@ -52,7 +52,7 @@ public class IsDevelopmentTagTests extends AbstractTagTests {
 
     @Test
     public void testVarExplicitScope() throws Exception {
-        SystemProperty.environment.set(Development);
+        SystemProperty.environment.set(Production);
         tag.setVar("myVar");
         tag.setScope("request");
         tag.doStartTag();
