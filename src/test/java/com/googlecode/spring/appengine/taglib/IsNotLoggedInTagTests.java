@@ -27,7 +27,7 @@ public class IsNotLoggedInTagTests extends AbstractTagTests {
     }
 
     @Test
-    public void testShowsBodyIfNotLoggedIn() throws Exception {
+    public void testRendersBodyIfNotLoggedIn() throws Exception {
         helper.setEnvIsLoggedIn(false);
         assertEquals(Tag.EVAL_BODY_INCLUDE, tag.doStartTag());
         assertEquals(Tag.EVAL_PAGE, tag.doEndTag());

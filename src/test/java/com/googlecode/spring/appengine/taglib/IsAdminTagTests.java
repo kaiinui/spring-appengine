@@ -28,7 +28,7 @@ public class IsAdminTagTests extends AbstractTagTests {
     }
 
     @Test
-    public void testShowsBodyIfAdmin() throws Exception {
+    public void testRendersBodyIfAdmin() throws Exception {
         helper.setEnvIsAdmin(true);
         assertEquals(Tag.EVAL_BODY_INCLUDE, tag.doStartTag());
         assertEquals(Tag.EVAL_PAGE, tag.doEndTag());

@@ -28,7 +28,7 @@ public class IsProductionTagTests extends AbstractTagTests {
     }
 
     @Test
-    public void testShowsBodyIfProduction() throws Exception {
+    public void testRendersBodyIfProduction() throws Exception {
         SystemProperty.environment.set(Production);
         assertEquals(Tag.EVAL_BODY_INCLUDE, tag.doStartTag());
         assertEquals(Tag.EVAL_PAGE, tag.doEndTag());

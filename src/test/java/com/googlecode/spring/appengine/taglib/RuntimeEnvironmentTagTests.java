@@ -11,24 +11,24 @@ import org.springframework.mock.web.MockHttpServletResponse;
 /**
  * @author Marcel Overdijk
  */
-public class ApplicationVersionTagTests extends AbstractTagTests {
+public class RuntimeEnvironmentTagTests extends AbstractTagTests {
 
-    private ApplicationVersionTag tag;
+    private RuntimeEnvironmentTag tag;
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        tag = new ApplicationVersionTag();
+        tag = new RuntimeEnvironmentTag();
         tag.setPageContext(pageContext);
-        System.setProperty("com.google.appengine.application.version", "my-application-version");
+        System.setProperty("com.google.appengine.runtime.environment", "my-runtime-environment");
     }
 
     @Test
-    public void testRendersApplicationVersion() throws Exception {
+    public void testRendersRuntimeEnvironment() throws Exception {
         tag.doStartTag();
         tag.doEndTag();
         String output = ((MockHttpServletResponse) pageContext.getResponse()).getContentAsString();
-        assertEquals("my-application-version", output);
+        assertEquals("my-runtime-environment", output);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ApplicationVersionTagTests extends AbstractTagTests {
         tag.doEndTag();
         String output = ((MockHttpServletResponse) pageContext.getResponse()).getContentAsString();
         assertEquals("", output);
-        assertEquals("my-application-version", pageContext.getAttribute("myVar", PageContext.PAGE_SCOPE));
+        assertEquals("my-runtime-environment", pageContext.getAttribute("myVar", PageContext.PAGE_SCOPE));
     }
 
     @Test
@@ -49,6 +49,6 @@ public class ApplicationVersionTagTests extends AbstractTagTests {
         tag.doEndTag();
         String output = ((MockHttpServletResponse) pageContext.getResponse()).getContentAsString();
         assertEquals("", output);
-        assertEquals("my-application-version", pageContext.getAttribute("myVar", PageContext.REQUEST_SCOPE));
+        assertEquals("my-runtime-environment", pageContext.getAttribute("myVar", PageContext.REQUEST_SCOPE));
     }
 }

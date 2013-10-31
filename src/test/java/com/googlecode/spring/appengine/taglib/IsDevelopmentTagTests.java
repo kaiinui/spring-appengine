@@ -28,7 +28,7 @@ public class IsDevelopmentTagTests extends AbstractTagTests {
     }
 
     @Test
-    public void testShowsBodyIfDevelopment() throws Exception {
+    public void testRendersBodyIfDevelopment() throws Exception {
         SystemProperty.environment.set(Development);
         assertEquals(Tag.EVAL_BODY_INCLUDE, tag.doStartTag());
         assertEquals(Tag.EVAL_PAGE, tag.doEndTag());

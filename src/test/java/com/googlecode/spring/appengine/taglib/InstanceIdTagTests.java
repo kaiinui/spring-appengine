@@ -8,27 +8,29 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 
+import com.google.apphosting.api.ApiProxy;
+
 /**
  * @author Marcel Overdijk
  */
-public class ApplicationVersionTagTests extends AbstractTagTests {
+public class InstanceIdTagTests extends AbstractTagTests {
 
-    private ApplicationVersionTag tag;
+    private InstanceIdTag tag;
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        tag = new ApplicationVersionTag();
+        tag = new InstanceIdTag();
         tag.setPageContext(pageContext);
-        System.setProperty("com.google.appengine.application.version", "my-application-version");
+        ApiProxy.getCurrentEnvironment().getAttributes().put("com.google.appengine.instance.id", "my-instance-id");
     }
 
     @Test
-    public void testRendersApplicationVersion() throws Exception {
+    public void testRendersInstanceId() throws Exception {
         tag.doStartTag();
         tag.doEndTag();
         String output = ((MockHttpServletResponse) pageContext.getResponse()).getContentAsString();
-        assertEquals("my-application-version", output);
+        assertEquals("my-instance-id", output);
     }
 
     @Test
@@ -38,7 +40,7 @@ public class ApplicationVersionTagTests extends AbstractTagTests {
         tag.doEndTag();
         String output = ((MockHttpServletResponse) pageContext.getResponse()).getContentAsString();
         assertEquals("", output);
-        assertEquals("my-application-version", pageContext.getAttribute("myVar", PageContext.PAGE_SCOPE));
+        assertEquals("my-instance-id", pageContext.getAttribute("myVar", PageContext.PAGE_SCOPE));
     }
 
     @Test
@@ -49,6 +51,6 @@ public class ApplicationVersionTagTests extends AbstractTagTests {
         tag.doEndTag();
         String output = ((MockHttpServletResponse) pageContext.getResponse()).getContentAsString();
         assertEquals("", output);
-        assertEquals("my-application-version", pageContext.getAttribute("myVar", PageContext.REQUEST_SCOPE));
+        assertEquals("my-instance-id", pageContext.getAttribute("myVar", PageContext.REQUEST_SCOPE));
     }
 }
