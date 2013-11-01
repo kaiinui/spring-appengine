@@ -41,7 +41,8 @@ public class IsAdminTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        boolean isAdmin = UserServiceFactory.getUserService().isUserAdmin();
+        UserService userService = UserServiceFactory.getUserService();
+        boolean isAdmin = userService.isUserLoggedIn() ? userService.isUserAdmin() : false;
         if (var != null) {
             pageContext.setAttribute(var, isAdmin, scope);
         }
