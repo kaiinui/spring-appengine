@@ -69,7 +69,7 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public void delete(Iterable<? extends T> entities) {
-        Assert.notNull(entities, "The iterable of entities must not be null"); 
+        Assert.notNull(entities, "The iterable of entities must not be null");
         ofyService.delete().entities(entities).now();
     }
 
