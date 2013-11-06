@@ -9,10 +9,14 @@ Add the library using the following Maven dependency:
     <dependency>
         <groupId>com.googlecode.spring-appengine</groupId>
         <artifactId>spring-appengine</artifactId>
-        <version>0.1</version>
+        <version>0.2</version>
     </dependency>
 
-And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-appengine/docs/0.1/javadoc-api).
+Or when using Gradle:
+
+    compile "com.googlecode.spring-appengine:spring-appengine:0.2"    
+
+Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-appengine/docs/0.1/javadoc-api).
 
 ## Release history
 
