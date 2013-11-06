@@ -16,8 +16,10 @@
 package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.google.appengine.api.datastore.AsyncDatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceConfig;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 /**
@@ -30,13 +32,15 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class AsyncDatastoreServiceFactoryBean implements FactoryBean<AsyncDatastoreService> {
+public class AsyncDatastoreServiceFactoryBean implements FactoryBean<AsyncDatastoreService>, InitializingBean {
 
-    // TODO: implement initializing bean to set config
+    private AsyncDatastoreService asyncDatastoreService;
+
+    private DatastoreServiceConfig config = DatastoreServiceConfig.Builder.withDefaults();
 
     @Override
     public AsyncDatastoreService getObject() throws Exception {
-        return DatastoreServiceFactory.getAsyncDatastoreService();
+        return asyncDatastoreService;
     }
 
     @Override
@@ -48,4 +52,11 @@ public class AsyncDatastoreServiceFactoryBean implements FactoryBean<AsyncDatast
     public boolean isSingleton() {
         return false;
     }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        asyncDatastoreService = DatastoreServiceFactory.getAsyncDatastoreService(config);
+    }
+
+    // TODO: config setters
 }

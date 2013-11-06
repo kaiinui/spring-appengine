@@ -16,8 +16,10 @@
 package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceConfig;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 /**
@@ -30,13 +32,15 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class DatastoreServiceFactoryBean implements FactoryBean<DatastoreService> {
+public class DatastoreServiceFactoryBean implements FactoryBean<DatastoreService>, InitializingBean {
 
-    // TODO: implement initializing bean to set config
+    private DatastoreService datastoreService;
+
+    private DatastoreServiceConfig config = DatastoreServiceConfig.Builder.withDefaults();
 
     @Override
     public DatastoreService getObject() throws Exception {
-        return DatastoreServiceFactory.getDatastoreService();
+        return datastoreService;
     }
 
     @Override
@@ -48,4 +52,11 @@ public class DatastoreServiceFactoryBean implements FactoryBean<DatastoreService
     public boolean isSingleton() {
         return false;
     }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        datastoreService = DatastoreServiceFactory.getDatastoreService(config);
+    }
+
+    // TODO: config setters
 }
