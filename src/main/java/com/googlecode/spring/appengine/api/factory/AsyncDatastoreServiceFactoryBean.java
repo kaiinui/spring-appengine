@@ -17,29 +17,31 @@ package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import com.google.appengine.api.backends.BackendService;
-import com.google.appengine.api.backends.BackendServiceFactory;
+import com.google.appengine.api.datastore.AsyncDatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link BackendService}.
+ * {@link FactoryBean} that creates an {@link AsyncDatastoreService}.
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="backendService" class="com.googlecode.spring.appengine.api.factory.BackendServiceFactoryBean" /&gt;</pre>
+ * <pre class="code"> &lt;bean id="asyncDatastoreService" class="com.googlecode.spring.appengine.api.factory.AsyncDatastoreServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class BackendServiceFactoryBean implements FactoryBean<BackendService> {
+public class AsyncDatastoreServiceFactoryBean implements FactoryBean<AsyncDatastoreService> {
+
+    // TODO: implement initializing bean to set config
 
     @Override
-    public BackendService getObject() throws Exception {
-        return BackendServiceFactory.getBackendService();
+    public AsyncDatastoreService getObject() throws Exception {
+        return DatastoreServiceFactory.getAsyncDatastoreService();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return BackendService.class;
+        return AsyncDatastoreService.class;
     }
 
     @Override

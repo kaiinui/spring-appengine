@@ -17,29 +17,29 @@ package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import com.google.appengine.api.backends.BackendService;
-import com.google.appengine.api.backends.BackendServiceFactory;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link BackendService}.
+ * {@link FactoryBean} that creates an {@link BlobstoreService}.
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="backendService" class="com.googlecode.spring.appengine.api.factory.BackendServiceFactoryBean" /&gt;</pre>
+ * <pre class="code"> &lt;bean id="blobstoreService" class="com.googlecode.spring.appengine.api.factory.BlobstoreServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class BackendServiceFactoryBean implements FactoryBean<BackendService> {
+public class BlobstoreServiceFactoryBean implements FactoryBean<BlobstoreService> {
 
     @Override
-    public BackendService getObject() throws Exception {
-        return BackendServiceFactory.getBackendService();
+    public BlobstoreService getObject() throws Exception {
+        return BlobstoreServiceFactory.getBlobstoreService();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return BackendService.class;
+        return BlobstoreService.class;
     }
 
     @Override

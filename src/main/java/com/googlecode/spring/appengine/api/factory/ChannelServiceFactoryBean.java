@@ -17,29 +17,29 @@ package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import com.google.appengine.api.backends.BackendService;
-import com.google.appengine.api.backends.BackendServiceFactory;
+import com.google.appengine.api.channel.ChannelService;
+import com.google.appengine.api.channel.ChannelServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link BackendService}.
+ * {@link FactoryBean} that creates an {@link ChannelService}.
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="backendService" class="com.googlecode.spring.appengine.api.factory.BackendServiceFactoryBean" /&gt;</pre>
+ * <pre class="code"> &lt;bean id="channelService" class="com.googlecode.spring.appengine.api.factory.ChannelServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class BackendServiceFactoryBean implements FactoryBean<BackendService> {
+public class ChannelServiceFactoryBean implements FactoryBean<ChannelService> {
 
     @Override
-    public BackendService getObject() throws Exception {
-        return BackendServiceFactory.getBackendService();
+    public ChannelService getObject() throws Exception {
+        return ChannelServiceFactory.getChannelService();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return BackendService.class;
+        return ChannelService.class;
     }
 
     @Override
