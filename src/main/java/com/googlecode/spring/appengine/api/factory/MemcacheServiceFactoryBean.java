@@ -27,11 +27,13 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="memcacheService" class="com.googlecode.spring.appengine.api.factory.MemcacheServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="memcacheService" class="com.googlecode.spring.appengine.api.factory.MemcacheServiceFactoryBean" /&gt;</pre>
  * 
  * <p>To specify the namespace use:
  * 
- * <pre class="code"> &lt;bean id="memcacheService" class="com.googlecode.spring.appengine.api.factory.MemcacheServiceFactoryBean" p:namespace="theNamespace" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="memcacheService" class="com.googlecode.spring.appengine.api.factory.MemcacheServiceFactoryBean" p:namespace="theNamespace" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

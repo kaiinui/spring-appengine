@@ -25,7 +25,8 @@ import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="urlFetchService" class="com.googlecode.spring.appengine.api.factory.URLFetchServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="urlFetchService" class="com.googlecode.spring.appengine.api.factory.URLFetchServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

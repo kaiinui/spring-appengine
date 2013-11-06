@@ -25,7 +25,8 @@ import com.google.appengine.api.log.LogServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="logService" class="com.googlecode.spring.appengine.api.factory.LogServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="logService" class="com.googlecode.spring.appengine.api.factory.LogServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

@@ -26,7 +26,8 @@ import com.google.appengine.api.search.SearchServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="searchService" class="com.googlecode.spring.appengine.api.factory.SearchServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="searchService" class="com.googlecode.spring.appengine.api.factory.SearchServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

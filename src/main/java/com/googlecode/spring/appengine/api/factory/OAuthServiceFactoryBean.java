@@ -25,7 +25,8 @@ import com.google.appengine.api.oauth.OAuthServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="oauthService" class="com.googlecode.spring.appengine.api.factory.OAuthServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="oauthService" class="com.googlecode.spring.appengine.api.factory.OAuthServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

@@ -25,7 +25,8 @@ import com.google.appengine.api.images.ImagesServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="imagesService" class="com.googlecode.spring.appengine.api.factory.ImagesServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="imagesService" class="com.googlecode.spring.appengine.api.factory.ImagesServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

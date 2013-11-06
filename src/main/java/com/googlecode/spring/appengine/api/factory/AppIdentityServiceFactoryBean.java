@@ -25,7 +25,8 @@ import com.google.appengine.api.appidentity.AppIdentityServiceFactory;
  * 
  * <p>Example configuration:
  *  
- * <pre class="code"> &lt;bean id="appIdentityService" class="com.googlecode.spring.appengine.api.factory.AppIdentityServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="appIdentityService" class="com.googlecode.spring.appengine.api.factory.AppIdentityServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

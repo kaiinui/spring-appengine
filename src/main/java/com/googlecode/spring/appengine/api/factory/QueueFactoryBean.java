@@ -27,11 +27,13 @@ import com.google.appengine.api.taskqueue.QueueFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="queue" class="com.googlecode.spring.appengine.api.factory.QueueFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="queue" class="com.googlecode.spring.appengine.api.factory.QueueFactoryBean" /&gt;</pre>
  * 
  * <p>Above example will return the default queue. To specify the queue name use:
  * 
- * <pre class="code"> &lt;bean id="queue" class="com.googlecode.spring.appengine.api.factory.QueueFactoryBean" p:name="theName" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="queue" class="com.googlecode.spring.appengine.api.factory.QueueFactoryBean" p:name="theName" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

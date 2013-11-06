@@ -25,7 +25,8 @@ import com.google.appengine.api.capabilities.CapabilitiesServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="capabilitiesService" class="com.googlecode.spring.appengine.api.factory.CapabilitiesServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="capabilitiesService" class="com.googlecode.spring.appengine.api.factory.CapabilitiesServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

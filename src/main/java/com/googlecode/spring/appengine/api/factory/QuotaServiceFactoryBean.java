@@ -25,7 +25,8 @@ import com.google.appengine.api.quota.QuotaServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="quotaService" class="com.googlecode.spring.appengine.api.factory.QuotaServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="quotaService" class="com.googlecode.spring.appengine.api.factory.QuotaServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

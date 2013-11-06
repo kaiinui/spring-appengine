@@ -25,7 +25,8 @@ import com.google.appengine.api.mail.MailServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="mailService" class="com.googlecode.spring.appengine.api.factory.MailServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="mailService" class="com.googlecode.spring.appengine.api.factory.MailServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

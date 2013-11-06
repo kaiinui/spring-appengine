@@ -25,7 +25,8 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="blobstoreService" class="com.googlecode.spring.appengine.api.factory.BlobstoreServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="blobstoreService" class="com.googlecode.spring.appengine.api.factory.BlobstoreServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

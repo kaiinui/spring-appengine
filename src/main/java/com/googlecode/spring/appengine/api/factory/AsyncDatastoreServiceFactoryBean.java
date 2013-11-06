@@ -21,13 +21,16 @@ import org.springframework.beans.factory.InitializingBean;
 import com.google.appengine.api.datastore.AsyncDatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceConfig;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.ImplicitTransactionManagementPolicy;
+import com.google.appengine.api.datastore.ReadPolicy;
 
 /**
  * {@link FactoryBean} that creates an {@link AsyncDatastoreService}.
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="asyncDatastoreService" class="com.googlecode.spring.appengine.api.factory.AsyncDatastoreServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="asyncDatastoreService" class="com.googlecode.spring.appengine.api.factory.AsyncDatastoreServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -58,5 +61,19 @@ public class AsyncDatastoreServiceFactoryBean implements FactoryBean<AsyncDatast
         asyncDatastoreService = DatastoreServiceFactory.getAsyncDatastoreService(config);
     }
 
-    // TODO: config setters
+    public void setDeadline(double deadline) {
+        this.config.deadline(deadline);
+    }
+    
+    public void implicitTransactionManagementPolicy(ImplicitTransactionManagementPolicy p) {
+        this.config.implicitTransactionManagementPolicy(p);
+    }
+    
+    public void maxEntityGroupsPerRpc(int maxEntityGroupsPerRpc) {
+        this.config.maxEntityGroupsPerRpc(maxEntityGroupsPerRpc);
+    }
+    
+    public void readPolicy(ReadPolicy readPolicy) {
+        this.config.readPolicy(readPolicy);
+    }
 }

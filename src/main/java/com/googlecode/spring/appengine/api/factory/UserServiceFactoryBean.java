@@ -25,7 +25,8 @@ import com.google.appengine.api.users.UserServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="userService" class="com.googlecode.spring.appengine.api.factory.UserServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="userService" class="com.googlecode.spring.appengine.api.factory.UserServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

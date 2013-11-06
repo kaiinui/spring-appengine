@@ -25,7 +25,8 @@ import com.google.appengine.api.backends.BackendServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="backendService" class="com.googlecode.spring.appengine.api.factory.BackendServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="backendService" class="com.googlecode.spring.appengine.api.factory.BackendServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

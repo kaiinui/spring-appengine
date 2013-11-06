@@ -34,19 +34,22 @@ import com.googlecode.objectify.impl.translate.TranslatorFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="ofyService" class="com.googlecode.spring.appengine.objectify.OfyServiceFactoryBean"
+ * <pre class="code">
+ * &lt;bean id="ofyService" class="com.googlecode.spring.appengine.objectify.OfyServiceFactoryBean"
  *   p:basePackage="com.mycompany.domain" /&gt;</pre>
  *
  * <p>Multiple <code>basePackages</code> can be provided as well:
  * 
- * <pre class="code"> &lt;bean id="ofyService" class="com.googlecode.spring.appengine.objectify.OfyServiceFactoryBean"
+ * <pre class="code">
+ * &lt;bean id="ofyService" class="com.googlecode.spring.appengine.objectify.OfyServiceFactoryBean"
  *   p:basePackage="com.mycompany.domain;com.mycompany.other.domain" /&gt;</pre>
  * 
  * <p>Instead of scanning for entities it is also possible to register them manually.  
  *
  * <p>Example configuration:
  *
- * <pre class="code"> &lt;bean id="ofyService" class="com.googlecode.spring.appengine.objectify.OfyServiceFactoryBean"&gt;
+ * <pre class="code">
+ * &lt;bean id="ofyService" class="com.googlecode.spring.appengine.objectify.OfyServiceFactoryBean"&gt;
  *   &lt;property name="entityClasses"&gt;
  *     &lt;list&gt;
  *       &lt;value&gt;com.mycompany.domain.Car&lt;/value&gt;

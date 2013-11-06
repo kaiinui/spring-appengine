@@ -25,7 +25,8 @@ import com.google.appengine.api.prospectivesearch.ProspectiveSearchServiceFactor
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="prospectiveSearchService" class="com.googlecode.spring.appengine.api.factory.ProspectiveSearchServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="prospectiveSearchService" class="com.googlecode.spring.appengine.api.factory.ProspectiveSearchServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

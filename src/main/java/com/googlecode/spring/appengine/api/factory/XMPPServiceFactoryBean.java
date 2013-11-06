@@ -25,7 +25,8 @@ import com.google.appengine.api.xmpp.XMPPServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="xmppService" class="com.googlecode.spring.appengine.api.factory.XMPPServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="xmppService" class="com.googlecode.spring.appengine.api.factory.XMPPServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2

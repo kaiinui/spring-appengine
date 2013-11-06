@@ -21,13 +21,23 @@ import org.springframework.beans.factory.InitializingBean;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceConfig;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.ImplicitTransactionManagementPolicy;
+import com.google.appengine.api.datastore.ReadPolicy;
 
 /**
  * {@link FactoryBean} that creates a {@link DatastoreService}.
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="datastoreService" class="com.googlecode.spring.appengine.api.factory.DatastoreServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="datastoreService" class="com.googlecode.spring.appengine.api.factory.DatastoreServiceFactoryBean" /&gt;</pre>
+ * 
+ * <p>To set datastore properties use:
+ * 
+ * <pre class="code">
+ * &lt;bean id="datastoreService" class="com.googlecode.spring.appengine.api.factory.DatastoreServiceFactoryBean" /&gt;
+ *      
+ * </pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -58,5 +68,19 @@ public class DatastoreServiceFactoryBean implements FactoryBean<DatastoreService
         datastoreService = DatastoreServiceFactory.getDatastoreService(config);
     }
 
-    // TODO: config setters
+    public void setDeadline(double deadline) {
+        this.config.deadline(deadline);
+    }
+    
+    public void implicitTransactionManagementPolicy(ImplicitTransactionManagementPolicy p) {
+        this.config.implicitTransactionManagementPolicy(p);
+    }
+    
+    public void maxEntityGroupsPerRpc(int maxEntityGroupsPerRpc) {
+        this.config.maxEntityGroupsPerRpc(maxEntityGroupsPerRpc);
+    }
+    
+    public void readPolicy(ReadPolicy readPolicy) {
+        this.config.readPolicy(readPolicy);
+    }
 }

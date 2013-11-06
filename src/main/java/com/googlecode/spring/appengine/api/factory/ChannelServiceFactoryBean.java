@@ -25,7 +25,8 @@ import com.google.appengine.api.channel.ChannelServiceFactory;
  * 
  * <p>Example configuration:
  * 
- * <pre class="code"> &lt;bean id="channelService" class="com.googlecode.spring.appengine.api.factory.ChannelServiceFactoryBean" /&gt;</pre>
+ * <pre class="code">
+ * &lt;bean id="channelService" class="com.googlecode.spring.appengine.api.factory.ChannelServiceFactoryBean" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
