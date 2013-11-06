@@ -19,26 +19,37 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.google.appengine.api.search.SearchService;
+import com.google.appengine.api.search.SearchServiceConfig;
 import com.google.appengine.api.search.SearchServiceFactory;
 
 /**
  * {@link FactoryBean} that creates a {@link SearchService}.
  * 
- * <p>Example configuration:
+ * <p>
+ * Example configuration:
  * 
  * <pre class="code">
- * &lt;bean id="searchService" class="com.googlecode.spring.appengine.api.factory.SearchServiceFactoryBean" /&gt;</pre>
+ * &lt;bean id="searchService" class="com.googlecode.spring.appengine.api.factory.SearchServiceFactoryBean" /&gt;
+ * </pre>
+ * 
+ * <p>Also the configurations options of the Search API can be set, like the deadline:
+ * 
+ * <pre class="code">
+ * &lt;bean id="searchService" class="com.googlecode.spring.appengine.api.factory.SearchServiceFactoryBean" p:deadline="5.0" /&gt;
+ * </pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
  */
 public class SearchServiceFactoryBean implements FactoryBean<SearchService>, InitializingBean {
 
-    // TODO: implement initializing bean to set config / namespace
+    private SearchService searchService;
+
+    private SearchServiceConfig.Builder configBuilder = SearchServiceConfig.newBuilder();
 
     @Override
     public SearchService getObject() throws Exception {
-        return SearchServiceFactory.getSearchService();
+        return searchService;
     }
 
     @Override
@@ -53,6 +64,14 @@ public class SearchServiceFactoryBean implements FactoryBean<SearchService>, Ini
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // TODO
+        searchService = SearchServiceFactory.getSearchService(configBuilder.build());
+    }
+
+    public void setDeadline(Double deadlineInSeconds) {
+        this.configBuilder.setDeadline(deadlineInSeconds);
+    }
+
+    public void setNamespace(String namespace) {
+        this.configBuilder.setNamespace(namespace);
     }
 }
