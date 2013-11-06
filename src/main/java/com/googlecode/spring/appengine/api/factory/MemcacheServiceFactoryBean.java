@@ -17,6 +17,7 @@ package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.StringUtils;
 
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -28,16 +29,22 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  * 
  * <pre class="code"> &lt;bean id="memcacheService" class="com.googlecode.spring.appengine.api.factory.MemcacheServiceFactoryBean" /&gt;</pre>
  * 
+ * <p>To specify the namespace use:
+ * 
+ * <pre class="code"> &lt;bean id="memcacheService" class="com.googlecode.spring.appengine.api.factory.MemcacheServiceFactoryBean" p:namespace="theNamespace" /&gt;</pre>
+ * 
  * @author Marcel Overdijk
  * @since 0.2
  */
 public class MemcacheServiceFactoryBean implements FactoryBean<MemcacheService>, InitializingBean {
 
-    // TODO: implement initializing bean to set namespace
+    private MemcacheService memcacheService;
+
+    private String namespace;
 
     @Override
     public MemcacheService getObject() throws Exception {
-        return MemcacheServiceFactory.getMemcacheService();
+        return memcacheService;
     }
 
     @Override
@@ -52,6 +59,15 @@ public class MemcacheServiceFactoryBean implements FactoryBean<MemcacheService>,
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // TODO
+        if (StringUtils.hasText(namespace)) {
+            memcacheService = MemcacheServiceFactory.getMemcacheService(namespace);
+        }
+        else {
+            memcacheService = MemcacheServiceFactory.getMemcacheService();
+        }
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }

@@ -16,6 +16,8 @@
 package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.StringUtils;
 
 import com.google.appengine.api.memcache.AsyncMemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -27,16 +29,22 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  * 
  * <pre class="code"> &lt;bean id="asyncMemcacheService" class="com.googlecode.spring.appengine.api.factory.AsyncMemcacheServiceFactoryBean" /&gt;</pre>
  * 
+ * <p>To specify the namespace use:
+ * 
+ * <pre class="code"> &lt;bean id="asyncMemcacheService" class="com.googlecode.spring.appengine.api.factory.AsyncMemcacheServiceFactoryBean" p:namespace="theNamespace" /&gt;</pre>
+ * 
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class AsyncMemcacheServiceFactoryBean implements FactoryBean<AsyncMemcacheService> {
+public class AsyncMemcacheServiceFactoryBean implements FactoryBean<AsyncMemcacheService>, InitializingBean {
 
-    // TODO: implement initializing bean to set namespace
+    private AsyncMemcacheService asyncMemcacheService;
+
+    private String namespace;
 
     @Override
     public AsyncMemcacheService getObject() throws Exception {
-        return MemcacheServiceFactory.getAsyncMemcacheService();
+        return asyncMemcacheService;
     }
 
     @Override
@@ -47,5 +55,19 @@ public class AsyncMemcacheServiceFactoryBean implements FactoryBean<AsyncMemcach
     @Override
     public boolean isSingleton() {
         return false;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        if (StringUtils.hasText(namespace)) {
+            asyncMemcacheService = MemcacheServiceFactory.getAsyncMemcacheService(namespace);
+        }
+        else {
+            asyncMemcacheService = MemcacheServiceFactory.getAsyncMemcacheService();
+        }
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }
