@@ -32,12 +32,10 @@ import com.google.appengine.api.datastore.ReadPolicy;
  * <pre class="code">
  * &lt;bean id="datastoreService" class="com.googlecode.spring.appengine.api.factory.DatastoreServiceFactoryBean" /&gt;</pre>
  * 
- * <p>To set datastore properties use:
+ * <p>Various properties of the datastore can be set, like the deadline:
  * 
  * <pre class="code">
- * &lt;bean id="datastoreService" class="com.googlecode.spring.appengine.api.factory.DatastoreServiceFactoryBean" /&gt;
- *      
- * </pre>
+ * &lt;bean id="datastoreService" class="com.googlecode.spring.appengine.api.factory.DatastoreServiceFactoryBean" p:deadline="5.0" /&gt;</pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
