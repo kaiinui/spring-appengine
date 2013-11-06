@@ -16,6 +16,9 @@ And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-ap
 
 ## Release history
 
+* 0.2 (WIP)
+    * Added Objectify integration (WIP)
+    * Added convenient JSP taglib encapsulating Google App Engine functionality like printing the application identifier, login link, user details etc. 
 * 0.1 (2013-10-17)
     * Initial release containing Spring @Cacheable support using App Engine Memcache
 
@@ -30,7 +33,7 @@ And read the latest javadoc api [here](http://marceloverdijk.github.io/spring-ap
 + [http://twitter.com/marceloverdijk](http://twitter.com/marceloverdijk)
 + [http://github.com/marceloverdijk](http://github.com/marceloverdijk)
 
-Logo designed and contributed by Ruud Voost.
+Logo designed and contributed by [Ruud Voost](http://www.ruudvoost.com).
 
 ## Copyright and License
 
