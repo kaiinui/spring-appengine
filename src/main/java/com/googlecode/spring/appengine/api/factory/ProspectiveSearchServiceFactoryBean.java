@@ -21,7 +21,7 @@ import com.google.appengine.api.prospectivesearch.ProspectiveSearchService;
 import com.google.appengine.api.prospectivesearch.ProspectiveSearchServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link ProspectiveSearchService}.
+ * {@link FactoryBean} that creates a {@link ProspectiveSearchService}.
  * 
  * <p>Example configuration:
  * 

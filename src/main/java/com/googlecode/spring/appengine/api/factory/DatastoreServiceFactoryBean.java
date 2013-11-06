@@ -21,7 +21,7 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link DatastoreService}.
+ * {@link FactoryBean} that creates a {@link DatastoreService}.
  * 
  * <p>Example configuration:
  * 

@@ -21,7 +21,7 @@ import com.google.appengine.api.backends.BackendService;
 import com.google.appengine.api.backends.BackendServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link BackendService}.
+ * {@link FactoryBean} that creates a {@link BackendService}.
  * 
  * <p>Example configuration:
  * 

@@ -22,7 +22,7 @@ import com.google.appengine.api.search.SearchService;
 import com.google.appengine.api.search.SearchServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link SearchService}.
+ * {@link FactoryBean} that creates a {@link SearchService}.
  * 
  * <p>Example configuration:
  * 

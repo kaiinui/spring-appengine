@@ -21,7 +21,7 @@ import com.google.appengine.api.mail.MailService;
 import com.google.appengine.api.mail.MailServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link MailService}.
+ * {@link FactoryBean} that creates a {@link MailService}.
  * 
  * <p>Example configuration:
  * 

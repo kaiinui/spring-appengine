@@ -21,7 +21,7 @@ import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link ChannelService}.
+ * {@link FactoryBean} that creates a {@link ChannelService}.
  * 
  * <p>Example configuration:
  * 

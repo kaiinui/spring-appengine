@@ -21,7 +21,7 @@ import com.google.appengine.api.quota.QuotaService;
 import com.google.appengine.api.quota.QuotaServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link QuotaService}.
+ * {@link FactoryBean} that creates a {@link QuotaService}.
  * 
  * <p>Example configuration:
  * 

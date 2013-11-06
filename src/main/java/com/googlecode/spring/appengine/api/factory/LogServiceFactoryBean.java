@@ -21,7 +21,7 @@ import com.google.appengine.api.log.LogService;
 import com.google.appengine.api.log.LogServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link LogService}.
+ * {@link FactoryBean} that creates a {@link LogService}.
  * 
  * <p>Example configuration:
  * 

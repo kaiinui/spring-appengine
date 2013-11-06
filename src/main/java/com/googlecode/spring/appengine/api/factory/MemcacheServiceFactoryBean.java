@@ -22,7 +22,7 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link MemcacheService}.
+ * {@link FactoryBean} that creates a {@link MemcacheService}.
  * 
  * <p>Example configuration:
  * 

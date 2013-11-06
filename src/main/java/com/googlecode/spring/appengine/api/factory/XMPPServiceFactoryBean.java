@@ -21,7 +21,7 @@ import com.google.appengine.api.xmpp.XMPPService;
 import com.google.appengine.api.xmpp.XMPPServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link XMPPService}.
+ * {@link FactoryBean} that creates a {@link XMPPService}.
  * 
  * <p>Example configuration:
  * 

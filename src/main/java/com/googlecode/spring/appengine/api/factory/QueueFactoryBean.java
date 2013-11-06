@@ -23,7 +23,7 @@ import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link Queue}.
+ * {@link FactoryBean} that creates a {@link Queue}.
  * 
  * <p>Example configuration:
  * 

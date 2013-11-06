@@ -21,7 +21,7 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link BlobstoreService}.
+ * {@link FactoryBean} that creates a {@link BlobstoreService}.
  * 
  * <p>Example configuration:
  * 

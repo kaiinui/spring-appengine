@@ -21,7 +21,7 @@ import com.google.appengine.api.capabilities.CapabilitiesService;
 import com.google.appengine.api.capabilities.CapabilitiesServiceFactory;
 
 /**
- * {@link FactoryBean} that creates an {@link CapabilitiesService}.
+ * {@link FactoryBean} that creates a {@link CapabilitiesService}.
  * 
  * <p>Example configuration:
  * 
