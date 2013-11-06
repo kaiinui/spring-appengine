@@ -16,6 +16,7 @@
 package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -30,7 +31,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class MemcacheServiceFactoryBean implements FactoryBean<MemcacheService> {
+public class MemcacheServiceFactoryBean implements FactoryBean<MemcacheService>, InitializingBean {
 
     // TODO: implement initializing bean to set namespace
 
@@ -47,5 +48,10 @@ public class MemcacheServiceFactoryBean implements FactoryBean<MemcacheService> 
     @Override
     public boolean isSingleton() {
         return false;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        // TODO
     }
 }

@@ -16,6 +16,7 @@
 package com.googlecode.spring.appengine.api.factory;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.google.appengine.api.search.SearchService;
 import com.google.appengine.api.search.SearchServiceFactory;
@@ -30,7 +31,7 @@ import com.google.appengine.api.search.SearchServiceFactory;
  * @author Marcel Overdijk
  * @since 0.2
  */
-public class SearchServiceFactoryBean implements FactoryBean<SearchService> {
+public class SearchServiceFactoryBean implements FactoryBean<SearchService>, InitializingBean {
 
     // TODO: implement initializing bean to set config / namespace
 
@@ -47,5 +48,10 @@ public class SearchServiceFactoryBean implements FactoryBean<SearchService> {
     @Override
     public boolean isSingleton() {
         return false;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        // TODO
     }
 }
