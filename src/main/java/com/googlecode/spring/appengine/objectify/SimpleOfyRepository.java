@@ -30,7 +30,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+import com.googlecode.objectify.cmd.DeleteType;
+import com.googlecode.objectify.cmd.Deleter;
+import com.googlecode.objectify.cmd.LoadType;
 import com.googlecode.objectify.cmd.Query;
+import com.googlecode.objectify.cmd.Saver;
 
 /**
  * TODO
@@ -53,35 +57,35 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public long count() {
-        return ofyService.load().type(type).count();
+        return query().count();
     }
 
     @Override
     public void delete(ID id) {
         Assert.notNull(id, "The id must not be null");
         if (id instanceof Long) {
-            ofyService.delete().type(type).id((Long) id).now();
+            deleteType().id((Long) id).now();
         }
         else {
-            ofyService.delete().type(type).id((String) id).now();
+            deleteType().id((String) id).now();
         }
     }
 
     @Override
     public void delete(Iterable<? extends T> entities) {
         Assert.notNull(entities, "The iterable of entities must not be null");
-        ofyService.delete().entities(entities).now();
+        delete().entities(entities).now();
     }
 
     @Override
     public void delete(T entity) {
         Assert.notNull(entity, "The entity must not be null");
-        ofyService.delete().entity(entity).now();
+        delete().entity(entity).now();
     }
 
     @Override
     public void deleteAll() {
-        ofyService.delete().keys(ofyService.load().type(type).keys().list()).now();
+        delete().keys(query().keys().list()).now();
     }
 
     @Override
@@ -92,13 +96,13 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public List<T> findAll() {
-        return ofyService.load().type(type).list();
+        return query().list();
     }
 
     @Override
     public List<T> findAll(Iterable<ID> ids) {
         Assert.notNull(ids, "The iterable of ids must not be null");
-        Map<ID, T> entities = ofyService.load().type(type).ids(ids);
+        Map<ID, T> entities = loadType().ids(ids);
         return new ArrayList<T>(entities.values());
     }
 
@@ -107,7 +111,7 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
         if (pageable == null) {
             return new PageImpl<T>(findAll());
         }
-        Query<T> query = ofyService.load().type(type);
+        Query<T> query = query();
         query.offset(pageable.getOffset());
         query.limit(pageable.getPageSize());
         long total = count();
@@ -117,7 +121,7 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
 
     @Override
     public List<T> findAll(Sort sort) {
-        Query<T> query = ofyService.load().type(type);
+        Query<T> query = query();
         if (sort != null) {
             Iterator<Sort.Order> iterator = sort.iterator();
             while (iterator.hasNext()) {
@@ -132,17 +136,17 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
     public T findOne(ID id) {
         Assert.notNull(id, "The id must not be null");
         if (id instanceof Long) {
-            return ofyService.load().type(type).id((Long) id).now();
+            return loadType().id((Long) id).now();
         }
         else {
-            return ofyService.load().type(type).id((String) id).now();
+            return loadType().id((String) id).now();
         }
     }
 
     @Override
     public <S extends T> List<S> save(Iterable<S> entities) {
         Assert.notNull(entities, "The iterable of entities must not be null");
-        ofyService.save().entities(entities).now();
+        save().entities(entities).now();
         List<S> temp = new ArrayList<S>();
         Iterator<S> iterator = entities.iterator();
         while (iterator.hasNext()) {
@@ -154,7 +158,27 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
     @Override
     public <S extends T> S save(S entity) {
         Assert.notNull(entity, "The entity must not be null");
-        ofyService.save().entity(entity).now();
+        save().entity(entity).now();
         return entity;
+    }
+
+    protected Deleter delete() {
+        return ofyService.delete();
+    }
+
+    protected DeleteType deleteType() {
+        return ofyService.delete().type(type);
+    }
+
+    protected LoadType<T> loadType() {
+        return ofyService.load().type(type);
+    }
+
+    protected Query<T> query() {
+        return ofyService.load().type(type);
+    }
+
+    protected Saver save() {
+        return ofyService.save();
     }
 }
