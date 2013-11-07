@@ -35,7 +35,7 @@ Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-
 * 0.X
     * Spring Security integration
     * Task Queue template similar to Spring JmsTemplate
-    * Thymeleaf dialect equivalent to the Google App Engine JSP taglib
+    * Thymeleaf dialect equivalent to the Google App Engine JSP taglib encapsulating App Engine specific functionality like printing the application identifier, login link, user details etc.
 
 ## Community
 
