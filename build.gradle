@@ -6,7 +6,6 @@ buildscript {
     }
     dependencies {
         classpath "org.asciidoctor:asciidoctor-gradle-plugin:0.7.0"
-        classpath "org.gradle.api.plugins:gradle-gae-plugin:0.8"
         classpath "org.gradle.api.plugins:gradle-nexus-plugin:0.3"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.2"
     }
@@ -32,7 +31,7 @@ ext.jspVersion = "2.1"
 ext.junitVersion = "4.11"
 ext.objectifyVersion = "4.0rc2"
 ext.servletVersion = "2.5"
-ext.springVersion = "3.2.4.RELEASE"
+ext.springVersion = "3.2.5.RELEASE"
 ext.springDataVersion = "1.6.1.RELEASE"
 
 repositories {

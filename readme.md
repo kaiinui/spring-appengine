@@ -23,7 +23,9 @@ Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-
 * 0.2 (WIP)
     * Added Objectify integration (WIP)
     * Added convenient Spring factory beans for creating App Engine service instances
-    * Added convenient JSP taglib encapsulating Google App Engine functionality like printing the application identifier, login link, user details etc. 
+    * Added convenient JSP taglib encapsulating Google App Engine functionality like printing the application identifier, login link, user details etc.
+    * Upgraded to App Engine 1.8.7
+    * Upgraded to Spring Framework 3.2.5
 * 0.1 (2013-10-17)
     * Initial release containing Spring @Cacheable support using App Engine Memcache
 
