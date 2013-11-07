@@ -62,11 +62,17 @@ asciidoctor {
     options = [
         eruby: "erubis",
         attributes: [
-            'source-highlighter': 'prettify',
+        	copycss : "",
+            doctype: "book",
+            icons : "font",
+			idprefix: "",
+            idseparator: "-",
+			numbered: "",
+            revnumber : project.version,
             sectanchors : "",
-            toc2: "",
-            idprefix: "",
-            idseparator: "-"
+            "source-highlighter": 'prettify',
+            "spring-appengine-version" : project.version,
+            toc2: ""
         ]
     ]
 }

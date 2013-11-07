@@ -24,7 +24,7 @@ Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-
     * Added Objectify integration (WIP)
     * Added convenient Spring factory beans for creating App Engine service instances
     * Added convenient Google App Engine JSP taglib encapsulating App Engine specific functionality like printing the application identifier, login link, user details etc.
-    * Added reference documentation (based on AsciiDoc) (WIP)
+    * Added reference documentation (based on Asciidoctor) (WIP)
     * Upgraded to Google App Engine 1.8.7
     * Upgraded to Spring Framework 3.2.5
 * 0.1 (2013-10-17)
