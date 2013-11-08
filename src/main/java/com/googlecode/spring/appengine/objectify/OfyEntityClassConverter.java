@@ -73,7 +73,15 @@ public class OfyEntityClassConverter<T extends ConversionService & ConverterRegi
 
     @Override
     public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
-        return conversionService.canConvert(sourceType.getType(), getIdFieldType(targetType.getType()));
+        try {
+            getMetadata(targetType.getType());
+            return conversionService.canConvert(sourceType.getType(), getIdFieldType(targetType.getType()));
+        }
+        catch (IllegalArgumentException ignore) {
+            // IllegalArgumentException will be thrown if target type is not registered as entity class
+            // is there a safer way to this? https://groups.google.com/forum/#!topic/objectify-appengine/5To55CZiI9w
+            return false;
+        }
     }
 
     @Override
@@ -81,8 +89,11 @@ public class OfyEntityClassConverter<T extends ConversionService & ConverterRegi
         this.conversionService.addConverter(this);
     }
 
+    private EntityMetadata<?> getMetadata(Class<?> clazz) {
+        return ofyService.factory().getMetadata(clazz);
+    }
+
     private Class<?> getIdFieldType(Class<?> clazz) {
-        EntityMetadata<?> metadata = ofyService.factory().getMetadata(clazz);
-        return metadata.getKeyMetadata().getIdFieldType();
+        return getMetadata(clazz).getKeyMetadata().getIdFieldType();
     }
 }
