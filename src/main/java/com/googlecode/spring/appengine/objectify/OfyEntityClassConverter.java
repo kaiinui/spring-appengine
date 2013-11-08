@@ -64,10 +64,10 @@ public class OfyEntityClassConverter<T extends ConversionService & ConverterRegi
         }
         Object id = conversionService.convert(source, getIdFieldType(targetType.getType()));
         if (id instanceof Long) {
-            return ofyService.ofy().load().type(targetType.getType()).id((Long) id);
+            return ofyService.ofy().load().type(targetType.getType()).id((Long) id).now();
         }
         else {
-            return ofyService.ofy().load().type(targetType.getType()).id((String) id);
+            return ofyService.ofy().load().type(targetType.getType()).id((String) id).now();
         }
     }
 
