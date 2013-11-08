@@ -30,11 +30,12 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.impl.translate.TranslatorFactory;
 
 /**
- * {@link OfyService} builder typically used when having a Java-based container 
+ * {@link OfyService} builder typically used when having a Java-based container
  * configuration setup.
  * 
- * <p> The builder can scan for {@link Entity} annotated classes by adding base packages.
- * Instead of scanning for entities it is also possible to register them manually.
+ * <p>
+ * The builder can scan for {@link Entity} annotated classes by adding base packages. Instead of scanning for entities it is also possible to register them
+ * manually.
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -64,20 +65,29 @@ public class OfyServiceBuilder {
 
     public OfyService build() {
         long startTime = System.currentTimeMillis();
-        entityClasses.addAll(scanBasePackages());
+
+        // create the ofy service
         OfyService ofyService = new OfyService();
-        for (Class<?> clazz : entityClasses) {
-            ofyService.factory().register(clazz);
-            if (logger.isInfoEnabled()) {
-                logger.info("Registered entity class [" + clazz.getName() + "]");
-            }
-        }
+
+        // register translator factories (important: needs to be done before registering entity classes)
         for (TranslatorFactory<?> translatorFactory : translatorFactories) {
             ofyService.factory().getTranslators().add(translatorFactory);
             if (logger.isInfoEnabled()) {
                 logger.info("Registered translator factory [" + translatorFactory.getClass().getName() + "]");
             }
         }
+
+        // scan base packages for entity classes
+        entityClasses.addAll(scanBasePackages());
+
+        // register entity classes
+        for (Class<?> clazz : entityClasses) {
+            ofyService.factory().register(clazz);
+            if (logger.isInfoEnabled()) {
+                logger.info("Registered entity class [" + clazz.getName() + "]");
+            }
+        }
+
         if (this.logger.isInfoEnabled()) {
             long elapsedTime = System.currentTimeMillis() - startTime;
             this.logger.info("Building objectify service completed in " + elapsedTime + " ms");
