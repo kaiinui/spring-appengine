@@ -15,7 +15,7 @@
  */
 package com.googlecode.spring.appengine.objectify;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 import org.springframework.beans.BeansException;
@@ -51,10 +51,7 @@ public class OfyEntityClassConverter<T extends ConversionService & ConverterRegi
 
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
-        Set<ConvertiblePair> convertibleTypes = new HashSet<ConvertiblePair>();
-        convertibleTypes.add(new ConvertiblePair(Long.class, Object.class));
-        convertibleTypes.add(new ConvertiblePair(String.class, Object.class));
-        return convertibleTypes;
+        return Collections.singleton(new ConvertiblePair(Object.class, Object.class));
     }
 
     @Override
