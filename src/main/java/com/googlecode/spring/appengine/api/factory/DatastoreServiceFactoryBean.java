@@ -70,15 +70,15 @@ public class DatastoreServiceFactoryBean implements FactoryBean<DatastoreService
         this.config.deadline(deadline);
     }
     
-    public void implicitTransactionManagementPolicy(ImplicitTransactionManagementPolicy p) {
+    public void setImplicitTransactionManagementPolicy(ImplicitTransactionManagementPolicy p) {
         this.config.implicitTransactionManagementPolicy(p);
     }
     
-    public void maxEntityGroupsPerRpc(int maxEntityGroupsPerRpc) {
+    public void setMaxEntityGroupsPerRpc(int maxEntityGroupsPerRpc) {
         this.config.maxEntityGroupsPerRpc(maxEntityGroupsPerRpc);
     }
     
-    public void readPolicy(ReadPolicy readPolicy) {
+    public void setReadPolicy(ReadPolicy readPolicy) {
         this.config.readPolicy(readPolicy);
     }
 }
