@@ -69,6 +69,9 @@ public class QueueFactoryBean implements FactoryBean<Queue>, InitializingBean {
         }
     }
 
+    /**
+     * Set the name of the queue to return. 
+     */
     public void setName(String name) {
         this.name = name;
     }

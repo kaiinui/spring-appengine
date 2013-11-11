@@ -67,7 +67,7 @@ public class DatastoreServiceFactoryBean implements FactoryBean<DatastoreService
     }
 
     /**
-     * Set the deadline, in seconds, for all rpcs initiated by this {@link DatastoreService}.
+     * Set the deadline in seconds.
      */
     public void setDeadline(double deadline) {
         this.config.deadline(deadline);

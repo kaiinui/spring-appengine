@@ -69,6 +69,9 @@ public class MemcacheServiceFactoryBean implements FactoryBean<MemcacheService>,
         }
     }
 
+    /**
+     * Specify the namespace to use.
+     */
     public void setNamespace(String namespace) {
         this.namespace = namespace;
     }

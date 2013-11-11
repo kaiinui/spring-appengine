@@ -67,10 +67,16 @@ public class SearchServiceFactoryBean implements FactoryBean<SearchService>, Ini
         searchService = SearchServiceFactory.getSearchService(configBuilder.build());
     }
 
+    /**
+     * Set the deadline in seconds. 
+     */
     public void setDeadline(Double deadlineInSeconds) {
         this.configBuilder.setDeadline(deadlineInSeconds);
     }
 
+    /**
+     * Specify the namespace to use.
+     */
     public void setNamespace(String namespace) {
         this.configBuilder.setNamespace(namespace);
     }
