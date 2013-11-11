@@ -30,6 +30,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.cmd.DeleteType;
 import com.googlecode.objectify.cmd.Deleter;
 import com.googlecode.objectify.cmd.LoadType;
@@ -164,6 +165,12 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
         return entity;
     }
 
+    /**
+     * Start a delete command chain. Lets you delete entities or keys.
+     * Note that all command chain objects are immutable.
+     * 
+     * @see Objectify#delete()
+     */
     protected Deleter delete() {
         return ofyService.delete();
     }
@@ -180,6 +187,12 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
         return ofyService.load().type(type);
     }
 
+    /**
+     * Start a save command chain. Allows you to save (or re-save) entity objects.
+     * Note that all command chain objects are immutable.
+     * 
+     * @see Objectify#save()
+     */
     protected Saver save() {
         return ofyService.save();
     }

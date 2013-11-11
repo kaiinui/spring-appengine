@@ -48,21 +48,33 @@ public class OfyServiceBuilder {
     private List<Class<?>> entityClasses = new ArrayList<Class<?>>();
     private List<TranslatorFactory<?>> translatorFactories = new ArrayList<TranslatorFactory<?>>();
 
+    /**
+     * Add base package to scan for entity classes.
+     */
     public OfyServiceBuilder addBasePackage(String basePackage) {
         basePackages.add(basePackage);
         return this;
     }
 
+    /**
+     * Register entity class.
+     */
     public OfyServiceBuilder registerEntity(Class<?> clazz) {
         entityClasses.add(clazz);
         return this;
     }
 
+    /**
+     * Register {@link TranslatorFactory}.
+     */
     public OfyServiceBuilder registerTranslatorFactory(TranslatorFactory<?> translatorFactory) {
         translatorFactories.add(translatorFactory);
         return this;
     }
 
+    /**
+     * Build and return the {@link OfyService}.
+     */
     public OfyService build() {
         long startTime = System.currentTimeMillis();
 
