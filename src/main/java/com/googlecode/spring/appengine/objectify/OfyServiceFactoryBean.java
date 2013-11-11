@@ -109,14 +109,23 @@ public class OfyServiceFactoryBean implements FactoryBean<OfyService>, Initializ
         this.ofyService = builder.build();
     }
 
+    /**
+     * Set the base package(s) to scan for entity classes. 
+     */
     public void setBasePackage(String basePackage) {
         this.basePackage = basePackage;
     }
 
+    /**
+     * Set the entity classes.
+     */
     public void setEntityClasses(List<Class<?>> entityClasses) {
         this.entityClasses = entityClasses;
     }
 
+    /**
+     * Set the translator factories. 
+     */
     public void setTranslatorFactories(List<TranslatorFactory<?>> translatorFactories) {
         this.translatorFactories = translatorFactories;
     }

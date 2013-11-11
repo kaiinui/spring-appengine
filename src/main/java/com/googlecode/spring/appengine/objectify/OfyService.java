@@ -32,22 +32,50 @@ import com.googlecode.objectify.cmd.Saver;
  */
 public class OfyService {
 
+    /**
+     * Returns the current {@link Objectify} instance.
+     * 
+     * @see ObjectifyService#ofy()
+     */
     public Objectify ofy() {
         return ObjectifyService.ofy();
     }
 
+    /**
+     * Returns the current {@link ObjectifyFactory} instance.
+     * 
+     * @see ObjectifyService#factory()
+     */
     public ObjectifyFactory factory() {
         return ObjectifyService.factory();
     }
 
+    /**
+     * Start a delete command chain. Lets you delete entities or keys.
+     * Note that all command chain objects are immutable.
+     * 
+     * @see Objectify#delete()
+     */
     public Deleter delete() {
         return ofy().delete();
     }
 
+    /**
+     * Start a load command chain. This is where you begin for any request that fetches data from the datastore: gets and queries.
+     * Note that all command chain objects are immutable.
+     * 
+     * @see Objectify#load()
+     */
     public Loader load() {
         return ofy().load();
     }
 
+    /**
+     * Start a save command chain. Allows you to save (or re-save) entity objects.
+     * Note that all command chain objects are immutable.
+     * 
+     * @see Objectify#save()
+     */
     public Saver save() {
         return ofy().save();
     }
