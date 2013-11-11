@@ -21,9 +21,10 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.Repository;
 
 /**
- * TODO
+ * Objectify specific extension of {@link Repository}.
  * 
  * @author Marcel Overdijk
  * @since 0.2

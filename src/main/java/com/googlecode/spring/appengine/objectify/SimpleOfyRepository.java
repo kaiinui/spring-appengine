@@ -37,10 +37,12 @@ import com.googlecode.objectify.cmd.Query;
 import com.googlecode.objectify.cmd.Saver;
 
 /**
- * TODO
+ * Default implementation of the {@link OfyRepository} interface.
  * 
  * @author Marcel Overdijk
  * @since 0.2
+ * @param <T> The type of the entity to handle
+ * @param <ID> The type of the entity's identifier
  */
 @Repository
 public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepository<T, ID> {
