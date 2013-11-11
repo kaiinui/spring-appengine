@@ -6,7 +6,7 @@
 
     <description>Spring App Engine Tag Library</description>
     <tlib-version>0.2-BUILD-SNAPSHOT</tlib-version>
-    <short-name>gae</short-name>
+    <short-name>appengine</short-name>
     <uri>http://spring-appengine.googlecode.com/tags</uri>
 
     <tag>

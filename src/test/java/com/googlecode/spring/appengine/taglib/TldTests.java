@@ -23,7 +23,7 @@ public class TldTests {
     public void testTldVersion() throws Exception {
         DocumentBuilderFactory docBuilderFactory  = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory .newDocumentBuilder();
-        Document doc = docBuilder.parse(new File("src/main/resources/META-INF/gae.tld"));
+        Document doc = docBuilder.parse(new File("src/main/resources/META-INF/appengine.tld"));
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
         XPathExpression expr = xpath.compile("/taglib/tlib-version/text()");

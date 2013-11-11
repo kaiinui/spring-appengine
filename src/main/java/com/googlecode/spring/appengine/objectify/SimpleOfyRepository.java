@@ -34,6 +34,7 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.cmd.DeleteType;
 import com.googlecode.objectify.cmd.Deleter;
 import com.googlecode.objectify.cmd.LoadType;
+import com.googlecode.objectify.cmd.Loader;
 import com.googlecode.objectify.cmd.Query;
 import com.googlecode.objectify.cmd.Saver;
 
@@ -166,8 +167,7 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
     }
 
     /**
-     * Start a delete command chain. Lets you delete entities or keys.
-     * Note that all command chain objects are immutable.
+     * Start a delete command chain.
      * 
      * @see Objectify#delete()
      */
@@ -175,21 +175,44 @@ public class SimpleOfyRepository<T, ID extends Serializable> implements OfyRepos
         return ofyService.delete();
     }
 
+    /**
+     * Start a delete command chain for the given entity type.
+     * 
+     * @see Deleter#type(Class)
+     */
     protected DeleteType deleteType() {
         return ofyService.delete().type(type);
     }
 
+    /**
+     * Start a load command chain.
+     * 
+     * @see Deleter#type(Class)
+     */
+    protected Loader load() {
+        return ofyService.load();
+    }
+
+    /**
+     * Start a load command chain for the given entity type.
+     * 
+     * @see Deleter#type(Class)
+     */
     protected LoadType<T> loadType() {
         return ofyService.load().type(type);
     }
 
+    /**
+     * Start a load command chain to execute a typed query.
+     * 
+     * @see Deleter#type(Class)
+     */
     protected Query<T> query() {
         return ofyService.load().type(type);
     }
 
     /**
-     * Start a save command chain. Allows you to save (or re-save) entity objects.
-     * Note that all command chain objects are immutable.
+     * Start a save command chain.
      * 
      * @see Objectify#save()
      */
