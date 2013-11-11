@@ -66,18 +66,30 @@ public class AsyncDatastoreServiceFactoryBean implements FactoryBean<AsyncDatast
         asyncDatastoreService = DatastoreServiceFactory.getAsyncDatastoreService(config);
     }
 
+    /**
+     * Set the deadline, in seconds, for all rpcs initiated by this {@link AsyncDatastoreService}.
+     */
     public void setDeadline(double deadline) {
         this.config.deadline(deadline);
     }
-    
+
+    /**
+     * Set the implicit transaction management policy.
+     */
     public void setImplicitTransactionManagementPolicy(ImplicitTransactionManagementPolicy p) {
         this.config.implicitTransactionManagementPolicy(p);
     }
-    
+
+    /**
+     * Set the maximum number of entity groups that can be represented in a single rpc. 
+     */
     public void setMaxEntityGroupsPerRpc(int maxEntityGroupsPerRpc) {
         this.config.maxEntityGroupsPerRpc(maxEntityGroupsPerRpc);
     }
-    
+
+    /**
+     * Set the read policy.
+     */
     public void setReadPolicy(ReadPolicy readPolicy) {
         this.config.readPolicy(readPolicy);
     }
