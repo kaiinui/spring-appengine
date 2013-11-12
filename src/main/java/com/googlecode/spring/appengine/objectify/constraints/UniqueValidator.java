@@ -64,41 +64,22 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
         KeyMetadata<?> keyMetadata = entityMetadata.getKeyMetadata();
 
-        Field idField = null;
-        try {
-            idField = TypeUtils.getDeclaredField(entityClass, keyMetadata.getIdFieldName());
-        }
-        catch (NoSuchFieldException e) {
-            throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain an id field");
-        }
+        String idFieldName = keyMetadata.getIdFieldName();
+        Object id = getFieldValue(entityClass, idFieldName, value);
 
         Query<?> query = ofyService.load().type(entityClass);
         for (String fieldName : constraintAnnotation.value()) {
-            try {
-                Field field = TypeUtils.getDeclaredField(entityClass, fieldName);
-                Object fieldValue = field.get(value);
-                query = query.filter(fieldName, fieldValue);
-            }
-            catch (NoSuchFieldException e) {
-                throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain '" + fieldName + "' field");
-            }
-            catch (IllegalArgumentException e) {
-                throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain '" + fieldName + "' field");
-            }
-            catch (IllegalAccessException e) {
-                throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain '" + fieldName + "' field");
+            query = query.filter(fieldName, getFieldValue(entityClass, fieldName, value));
+        }
+
+        List<?> list = query.list();
+        for (Object obj : list) {
+            Object otherId = getFieldValue(entityClass, idFieldName, obj);
+            if (!id.equals(otherId)) {
+                return false;
             }
         }
 
-        // TODO
-
-//        List<?> list = query.list();
-//        for (Object object : list) {
-//            Object otherId = "def"; // TODO
-//            if (!id.equals(otherId)) {
-//                return false;
-//            }
-//        }
         return true;
     }
 
@@ -106,11 +87,19 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         return ofyService.factory().getMetadata(clazz);
     }
 
-    private Field getField(Class<?> entityClass, String fieldName) throws NoSuchFieldException {
-        return TypeUtils.getDeclaredField(entityClass, fieldName);
+    private Object getFieldValue(Class<?> clazz, String fieldName, Object obj) {
+        try {
+            Field field = TypeUtils.getDeclaredField(clazz, fieldName);
+            return field.get(obj);
+        }
+        catch (NoSuchFieldException e) {
+            throw new ConstraintDeclarationException("Class '" + clazz.getName() + "' does not contain '" + fieldName + "' field");
+        }
+        catch (IllegalArgumentException e) {
+            throw new ConstraintDeclarationException("Class '" + clazz.getName() + "' does not contain '" + fieldName + "' field");
+        }
+        catch (IllegalAccessException e) {
+            throw new ConstraintDeclarationException("Class '" + clazz.getName() + "' does not contain '" + fieldName + "' field");
+        }
     }
-
-    // private Class<?> getIdFieldType(Class<?> clazz) {
-    // return getMetadata(clazz).getKeyMetadata().getIdFieldType();
-    // }
 }
