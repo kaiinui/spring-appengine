@@ -22,6 +22,7 @@ Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-
 
 * 0.2 (WIP)
     * Added Objectify integration (WIP)
+    * Added Objectify / JSR 303 Bean Validation @Unique constraint to validate field uniqueness in Objectify entities (WIP)
     * Added convenient Spring factory beans for creating App Engine service instances
     * Added convenient Google App Engine JSP taglib encapsulating App Engine specific functionality like printing the application identifier, login link, user details etc.
     * Added reference documentation (based on Asciidoctor) (WIP)

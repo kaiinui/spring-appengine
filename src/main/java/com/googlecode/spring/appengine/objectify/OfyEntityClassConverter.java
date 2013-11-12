@@ -26,6 +26,7 @@ import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterRegistry;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.googlecode.objectify.impl.EntityMetadata;
@@ -45,6 +46,8 @@ public class OfyEntityClassConverter<T extends ConversionService & ConverterRegi
     private final OfyService ofyService;
 
     public OfyEntityClassConverter(T conversionService, OfyService ofyService) {
+        Assert.notNull(conversionService, "ConversionService must not be null");
+        Assert.notNull(ofyService, "OfyService must not be null");
         this.conversionService = conversionService;
         this.ofyService = ofyService;
     }
