@@ -18,6 +18,7 @@ package com.googlecode.spring.appengine.objectify.constraints;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import javax.validation.ConstraintDeclarationException;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -25,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.googlecode.objectify.cmd.Query;
+import com.googlecode.objectify.impl.EntityMetadata;
 import com.googlecode.objectify.impl.KeyMetadata;
 import com.googlecode.objectify.impl.TypeUtils;
 import com.googlecode.spring.appengine.objectify.OfyService;
@@ -54,32 +56,61 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         Class<?> entityClass = value.getClass();
-        KeyMetadata<?> keyMetadata = getKeyMetadata(entityClass);
-        String idFieldName = keyMetadata.getIdFieldName();
-        Object id = "abc"; // TODO
-        Query<?> query = ofyService.load().type(entityClass);
-        for (String field : constraintAnnotation.value()) {
-            query.filter(field, null); // TODO 
+        EntityMetadata<?> entityMetadata = getMetadata(entityClass);
+
+        if (entityMetadata == null) {
+            throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' was not registered in the objectify service");
         }
-        List<?> list = query.list();
-        for (Object object : list) {
-            Object otherId = "def"; // TODO
-            if (!id.equals(otherId)) {
-                return false;
+
+        KeyMetadata<?> keyMetadata = entityMetadata.getKeyMetadata();
+
+        Field idField = null;
+        try {
+            idField = TypeUtils.getDeclaredField(entityClass, keyMetadata.getIdFieldName());
+        }
+        catch (NoSuchFieldException e) {
+            throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain an id field");
+        }
+
+        Query<?> query = ofyService.load().type(entityClass);
+        for (String fieldName : constraintAnnotation.value()) {
+            try {
+                Field field = TypeUtils.getDeclaredField(entityClass, fieldName);
+                Object fieldValue = field.get(value);
+                query = query.filter(fieldName, fieldValue);
+            }
+            catch (NoSuchFieldException e) {
+                throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain '" + fieldName + "' field");
+            }
+            catch (IllegalArgumentException e) {
+                throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain '" + fieldName + "' field");
+            }
+            catch (IllegalAccessException e) {
+                throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' does not contain '" + fieldName + "' field");
             }
         }
+
+        // TODO
+
+//        List<?> list = query.list();
+//        for (Object object : list) {
+//            Object otherId = "def"; // TODO
+//            if (!id.equals(otherId)) {
+//                return false;
+//            }
+//        }
         return true;
+    }
+
+    private EntityMetadata<?> getMetadata(Class<?> clazz) {
+        return ofyService.factory().getMetadata(clazz);
     }
 
     private Field getField(Class<?> entityClass, String fieldName) throws NoSuchFieldException {
         return TypeUtils.getDeclaredField(entityClass, fieldName);
     }
-    
-    private KeyMetadata getKeyMetadata(Class<?> clazz) {
-        return ofyService.factory().getMetadata(clazz).getKeyMetadata();
-    }
-    
-//    private Class<?> getIdFieldType(Class<?> clazz) {
-//        return getMetadata(clazz).getKeyMetadata().getIdFieldType();
-//    }
+
+    // private Class<?> getIdFieldType(Class<?> clazz) {
+    // return getMetadata(clazz).getKeyMetadata().getIdFieldType();
+    // }
 }
