@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.spring.appengine.objectify;
+package com.googlecode.spring.appengine.objectify.converter;
 
 import java.util.Collections;
 import java.util.Set;
@@ -30,6 +30,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.googlecode.objectify.impl.EntityMetadata;
+import com.googlecode.spring.appengine.objectify.OfyService;
 
 /**
  * {@link Converter} to convert arbitrary input into domain classes.

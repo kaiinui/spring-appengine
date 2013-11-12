@@ -24,11 +24,11 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.util.ReflectionUtils;
 
 import com.googlecode.objectify.cmd.Query;
 import com.googlecode.objectify.impl.EntityMetadata;
 import com.googlecode.objectify.impl.KeyMetadata;
-import com.googlecode.objectify.impl.TypeUtils;
 import com.googlecode.spring.appengine.objectify.OfyService;
 
 /**
@@ -74,8 +74,7 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
         List<?> list = query.list();
         for (Object obj : list) {
-            Object otherId = getFieldValue(entityClass, idFieldName, obj);
-            if (!id.equals(otherId)) {
+            if (!getFieldValue(entityClass, idFieldName, obj).equals(id)) {
                 return false;
             }
         }
@@ -88,18 +87,12 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
     }
 
     private Object getFieldValue(Class<?> clazz, String fieldName, Object obj) {
-        try {
-            Field field = TypeUtils.getDeclaredField(clazz, fieldName);
-            return field.get(obj);
-        }
-        catch (NoSuchFieldException e) {
+        Field field = ReflectionUtils.findField(clazz, fieldName);
+        if (field == null) {
             throw new ConstraintDeclarationException("Class '" + clazz.getName() + "' does not contain '" + fieldName + "' field");
         }
-        catch (IllegalArgumentException e) {
-            throw new ConstraintDeclarationException("Class '" + clazz.getName() + "' does not contain '" + fieldName + "' field");
-        }
-        catch (IllegalAccessException e) {
-            throw new ConstraintDeclarationException("Class '" + clazz.getName() + "' does not contain '" + fieldName + "' field");
+        else {
+            return ReflectionUtils.getField(field, obj);
         }
     }
 }

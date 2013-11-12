@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.spring.appengine.objectify;
+package com.googlecode.spring.appengine.objectify.repository;
 
 import java.io.Serializable;
 import java.util.List;

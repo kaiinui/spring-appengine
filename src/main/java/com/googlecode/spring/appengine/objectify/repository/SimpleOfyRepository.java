@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.spring.appengine.objectify;
+package com.googlecode.spring.appengine.objectify.repository;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -37,6 +37,7 @@ import com.googlecode.objectify.cmd.LoadType;
 import com.googlecode.objectify.cmd.Loader;
 import com.googlecode.objectify.cmd.Query;
 import com.googlecode.objectify.cmd.Saver;
+import com.googlecode.spring.appengine.objectify.OfyService;
 
 /**
  * Default implementation of the {@link OfyRepository} interface.
