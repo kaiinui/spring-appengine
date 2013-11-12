@@ -15,13 +15,18 @@
  */
 package com.googlecode.spring.appengine.objectify.constraints;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import com.googlecode.objectify.impl.EntityMetadata;
+import com.googlecode.objectify.cmd.Query;
+import com.googlecode.objectify.impl.KeyMetadata;
+import com.googlecode.objectify.impl.TypeUtils;
 import com.googlecode.spring.appengine.objectify.OfyService;
 
 /**
@@ -49,16 +54,32 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         Class<?> entityClass = value.getClass();
-        // get key meta data to get @id field name
-        // TODO
-        return false;
+        KeyMetadata<?> keyMetadata = getKeyMetadata(entityClass);
+        String idFieldName = keyMetadata.getIdFieldName();
+        Object id = "abc"; // TODO
+        Query<?> query = ofyService.load().type(entityClass);
+        for (String field : constraintAnnotation.value()) {
+            query.filter(field, null); // TODO 
+        }
+        List<?> list = query.list();
+        for (Object object : list) {
+            Object otherId = "def"; // TODO
+            if (!id.equals(otherId)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    private EntityMetadata<?> getMetadata(Class<?> clazz) {
-        return ofyService.factory().getMetadata(clazz);
+    private Field getField(Class<?> entityClass, String fieldName) throws NoSuchFieldException {
+        return TypeUtils.getDeclaredField(entityClass, fieldName);
     }
-
-    private Class<?> getIdFieldType(Class<?> clazz) {
-        return getMetadata(clazz).getKeyMetadata().getIdFieldType();
+    
+    private KeyMetadata getKeyMetadata(Class<?> clazz) {
+        return ofyService.factory().getMetadata(clazz).getKeyMetadata();
     }
+    
+//    private Class<?> getIdFieldType(Class<?> clazz) {
+//        return getMetadata(clazz).getKeyMetadata().getIdFieldType();
+//    }
 }

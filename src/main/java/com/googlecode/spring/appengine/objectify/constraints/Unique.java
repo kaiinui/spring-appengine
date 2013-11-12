@@ -36,13 +36,13 @@ import javax.validation.Payload;
 @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 public @interface Unique {
 
+    String[] value();
+
     String message() default "{com.googlecode.spring.appengine.objectify.constraints.Unique.message}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
-    String[] properties();
 
     /**
      * Defines several {@code @Unique} annotations on the same element.
