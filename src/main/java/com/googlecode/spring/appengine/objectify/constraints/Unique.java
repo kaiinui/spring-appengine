@@ -39,7 +39,8 @@ import javax.validation.Payload;
  * 
  *     &#064;Id private Long id;
  *     private String license;
- *     ..
+ * 
+ *     // ...
  * }
  * 
  * &#064;Entity
@@ -49,7 +50,8 @@ import javax.validation.Payload;
  *     &#064;Id private Long id;
  *     private String brand;
  *     private String model;
- *     ..
+ * 
+ *     // ...
  * }
  * </pre>
  * 
