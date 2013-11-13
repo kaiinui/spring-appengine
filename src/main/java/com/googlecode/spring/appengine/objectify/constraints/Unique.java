@@ -25,30 +25,34 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * A class-level constraint that checks if a field, or a combination of fields, is unique within the annotated entity.
+ * A class-level constraint that checks if a field, or a combination of fields,
+ * is unique within the annotated entity.
  * 
- * <p>Example:
+ * <p>
+ * Example:
  * 
  * <pre class="code">
  * &#064;Entity
- * &#064;Unique("license")
+ * &#064;Unique(&quot;license&quot;)
  * public class Car {
  * 
  *     &#064;Id private Long id;
  *     private String license;
- * 
+ *     ..
  * }
  * 
  * &#064;Entity
- * &#064;Unique({"brand", "model"})
+ * &#064;Unique({ &quot;brand&quot;, &quot;model&quot; })
  * public class Model {
  * 
  *     &#064;Id private Long id;
  *     private String brand;
  *     private String model;
- * 
+ *     ..
  * }
  * </pre>
+ * 
+ * <p>Note that this constraint does not prohibit to store entities that violate the unique constraint.
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -60,7 +64,10 @@ import javax.validation.Payload;
 public @interface Unique {
 
     /**
-     * @return The field, or a combination of fields, that should be unique within the annotated entity.
+     * @return The field, or a combination of fields, that should be unique within 
+     *         the annotated entity. A {@link ConstraintDeclarationException} will 
+     *         be thrown upon validation if a field could not be found or the 
+     *         entity is not registered in the objectify service.
      */
     String[] value();
 
