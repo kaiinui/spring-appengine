@@ -55,38 +55,38 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        // get meta data of the entity class to validate, and return exception if not found
         Class<?> entityClass = value.getClass();
         EntityMetadata<?> entityMetadata = getMetadata(entityClass);
-
         if (entityMetadata == null) {
             throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' was not registered in the objectify service");
         }
 
+        // get value of entity id
         KeyMetadata<?> keyMetadata = entityMetadata.getKeyMetadata();
-
         String idFieldName = keyMetadata.getIdFieldName();
         Object id = getFieldValue(entityClass, idFieldName, value);
 
+        // create query based on the field(s) that should be unique 
         Query<?> query = ofyService.load().type(entityClass);
         for (String fieldName : constraintAnnotation.value()) {
             query = query.filter(fieldName, getFieldValue(entityClass, fieldName, value));
         }
 
+        // loop over query result to validate if unique constraint is valid
         List<?> list = query.list();
         for (Object obj : list) {
+            // if id of stored entity does not equal id of entity being validated, then add constraint violation
+            // if id of stored entity does equal id of entity being validated, this means entity is being updated and unique constraint is not violated
             if (!getFieldValue(entityClass, idFieldName, obj).equals(id)) {
-                
-                // new
+                // disable class-level constraint violation
+                context.disableDefaultConstraintViolation();
+                // add constraint violation for each field
                 for (String node : constraintAnnotation.value()) {
                     context.buildConstraintViolationWithTemplate(constraintAnnotation.message())
                         .addNode(node)
                         .addConstraintViolation();
                 }
-                
-                context.disableDefaultConstraintViolation();
-                
-                // /new
-                
                 return false;
             }
         }

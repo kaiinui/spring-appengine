@@ -26,7 +26,8 @@ import javax.validation.Payload;
 
 /**
  * A class-level constraint that checks if a field, or a combination of fields,
- * is unique within the annotated entity.
+ * is unique within the annotated entity. Although this is a class-level constraint,
+ * the error(s) will be associated to the field(s).
  * 
  * <p>
  * Example:
