@@ -59,6 +59,9 @@ import javax.validation.Payload;
 @Target({ ElementType.TYPE })
 public @interface Unique {
 
+    /**
+     * @return The field, or a combination of fields, that should be unique within the annotated entity.
+     */
     String[] value();
 
     String message() default "{com.googlecode.spring.appengine.objectify.constraints.Unique.message}";
