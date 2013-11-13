@@ -55,7 +55,9 @@ import javax.validation.Payload;
  * }
  * </pre>
  * 
- * <p>Note that this constraint does not prohibit to store entities that violate the unique constraint.
+ * <p>Note that this constraint does not prohibit to store entities that violate 
+ * the unique constraint. It only validates the uniqueness at the moment you 
+ * validate the entity.
  * 
  * @author Marcel Overdijk
  * @since 0.2
