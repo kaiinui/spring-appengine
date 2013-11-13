@@ -75,6 +75,18 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         List<?> list = query.list();
         for (Object obj : list) {
             if (!getFieldValue(entityClass, idFieldName, obj).equals(id)) {
+                
+                // new
+                for (String node : constraintAnnotation.value()) {
+                    context.buildConstraintViolationWithTemplate(constraintAnnotation.message())
+                        .addNode(node)
+                        .addConstraintViolation();
+                }
+                
+                context.disableDefaultConstraintViolation();
+                
+                // /new
+                
                 return false;
             }
         }
