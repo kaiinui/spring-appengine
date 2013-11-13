@@ -25,7 +25,30 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * TODO
+ * A class-level constraint that checks if a field, or a combination of fields, is unique within the annotated entity.
+ * 
+ * <p>Example:
+ * 
+ * <pre class="code">
+ * &#064;Entity
+ * &#064;Unique("license")
+ * public class Car {
+ * 
+ *     &#064;Id private Long id;
+ *     private String license;
+ * 
+ * }
+ * 
+ * &#064;Entity
+ * &#064;Unique({"brand", "model"})
+ * public class Model {
+ * 
+ *     &#064;Id private Long id;
+ *     private String brand;
+ *     private String model;
+ * 
+ * }
+ * </pre>
  * 
  * @author Marcel Overdijk
  * @since 0.2
@@ -33,7 +56,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = { UniqueValidator.class })
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+@Target({ ElementType.TYPE })
 public @interface Unique {
 
     String[] value();
@@ -49,7 +72,7 @@ public @interface Unique {
      */
     @Documented
     @Retention(RetentionPolicy.RUNTIME)
-    @Target({ ElementType.TYPE, ElementType.ANNOTATION_TYPE })
+    @Target({ ElementType.TYPE })
     public @interface List {
         Unique[] value();
     }

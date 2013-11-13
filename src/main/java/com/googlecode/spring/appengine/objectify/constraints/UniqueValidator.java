@@ -32,7 +32,7 @@ import com.googlecode.objectify.impl.KeyMetadata;
 import com.googlecode.spring.appengine.objectify.OfyService;
 
 /**
- * TODO
+ * Validator for the {@link Unique} constraint annotation.
  * 
  * @author Marcel Overdijk
  * @since 0.2
