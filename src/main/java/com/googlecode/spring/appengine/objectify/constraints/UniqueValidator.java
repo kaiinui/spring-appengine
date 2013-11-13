@@ -59,7 +59,7 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         Class<?> entityClass = value.getClass();
         EntityMetadata<?> entityMetadata = getMetadata(entityClass);
         if (entityMetadata == null) {
-            throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' was not registered in the objectify service");
+            throw new ConstraintDeclarationException("Class '" + entityClass.getName() + "' was not registered in the OfyService");
         }
 
         // get value of entity id
