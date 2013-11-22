@@ -1,0 +1,7 @@
+com.googlecode.spring.appengine.api.factory
+com.googlecode.spring.appengine.cache.memcache
+com.googlecode.spring.appengine.objectify
+com.googlecode.spring.appengine.objectify.constraints
+com.googlecode.spring.appengine.objectify.converter
+com.googlecode.spring.appengine.objectify.repository
+com.googlecode.spring.appengine.taglib
