@@ -16,17 +16,17 @@ Or when using Gradle:
 
     compile "com.googlecode.spring-appengine:spring-appengine:0.2"    
 
-Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-appengine/docs/0.1/javadoc-api).
+Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-appengine/docs/0.2/javadoc-api).
 
 ## Release history
 
-* 0.2 (WIP)
-    * Added Objectify integration (WIP)
-    * Added Objectify / JSR 303 Bean Validation @Unique constraint to validate field uniqueness in Objectify entities (WIP)
+* 0.2 (2013-11-22)
+    * Added Objectify integration
+    * Added Objectify entity class converter to convert id types into domain classes
+    * Added Objectify / JSR 303 Bean Validation @Unique constraint to validate field uniqueness in Objectify entities
     * Added convenient Spring factory beans for creating App Engine service instances
     * Added convenient Google App Engine JSP taglib encapsulating App Engine specific functionality like printing the application identifier, login link, user details etc.
-    * Added reference documentation (based on Asciidoctor) (WIP)
-    * Upgraded to Google App Engine 1.8.7
+    * Upgraded to Google App Engine 1.8.8
     * Upgraded to Spring Framework 3.2.5
 * 0.1 (2013-10-17)
     * Initial release containing Spring @Cacheable support using App Engine Memcache
@@ -34,6 +34,7 @@ Next, read the latest javadoc api [here](http://marceloverdijk.github.io/spring-
 ## Roadmap
 
 * 0.X
+    * Reference documentation (based on Asciidoctor)
     * Spring Security integration
     * Task Queue template similar to Spring JmsTemplate
     * Thymeleaf dialect equivalent to the Google App Engine JSP taglib encapsulating App Engine specific functionality like printing the application identifier, login link, user details etc.
